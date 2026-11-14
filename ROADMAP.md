@@ -2,7 +2,7 @@
 
 [English](#english) · [Nederlands](#nederlands)
 
-Current published release: **1.1.1**, including reference checks, Repairs and HACS support. This checkout prepares **1.1.2**: quarantine concurrency protection, reference diagnostics, list refresh fixes and documentation/translation corrections. All releases remain intended for controlled early testing, not a guarantee of safety. See [the changelog](hass_cleaner/CHANGELOG.md).
+Current published release: **1.1.1**, including reference checks, Repairs and HACS support. This checkout prepares **1.2.0**: quarantine concurrency protection, reference diagnostics, list refresh fixes, documentation/translation corrections, a German interface and exports, and the companion's read-only “Referenzprüfung” sidebar panel. All releases remain intended for controlled early testing, not a guarantee of safety. See [the changelog](hass_cleaner/CHANGELOG.md).
 
 ## Nederlands
 
@@ -24,7 +24,7 @@ Veiligheid gaat vóór extra opruimwinst. Een release gaat pas door wanneer risi
 | 1.0.2 | Uitgebracht | Herstel- en registerjournals, veilige configuratiesynchronisatie, begrensd scangeheugen, robuuste verzoekvalidatie en verbeterde tweetalige exports. |
 | 1.1.0 | Uitgebracht | Companion met referentiecontrole en native Reparaties. |
 | 1.1.1 | Uitgebracht | HACS-installatie en instructies. |
-| 1.1.2 | Voorbereid | Atomaire quarantaine, diagnostiek, lijstverversing en documentatie/vertalingen. |
+| 1.2.0 | Voorbereid | Atomaire quarantaine, diagnostiek, lijstverversing, documentatie/vertalingen, Duitse interface en het zijpaneel “Referenzprüfung” van de companion. |
 
 ### Praktijkcontrole voor vroege testers
 
@@ -78,7 +78,7 @@ Safety takes priority over reclaimed space. A release proceeds only when risky s
 | 1.0.2 | Released | Recovery and registry journals, safe configuration synchronization, bounded scan memory, robust request validation and improved bilingual exports. |
 | 1.1.0 | Released | Companion reference checks and native Repairs. |
 | 1.1.1 | Released | HACS installation support and instructions. |
-| 1.1.2 | Prepared | Atomic quarantine, diagnostics, list refresh and documentation/translations. |
+| 1.2.0 | Prepared | Atomic quarantine, diagnostics, list refresh, documentation/translations, German interface and the companion's “Referenzprüfung” sidebar panel. |
 
 ### Practical checks for early testers
 

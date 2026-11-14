@@ -1,6 +1,9 @@
 # Changelog
 
-## 1.1.2 — Unreleased
+## 1.2.0 — Unreleased
+
+- Ship the bundled companion at version 1.2.0, the same version as the app: shared constants module, diagnostics, and the read-only “Referenzprüfung” sidebar panel with its `www` asset. The panel only reads the existing WebSocket command, is limited to administrators and is removed with the config entry.
+- Companion translation files now match `strings.json` in every language; English, Dutch and German setup/Repairs texts are packaged with the companion ZIP.
 
 - Add German (Deutsch) as a third interface language: full interface dictionary, language selector, app option and settings validation. German exports (audit report, cleanup preparation, CSV headers and reference section) and the dynamic reference/confirmation texts rendered by the app are translated as well, with English as fallback for strings without a German text. The optional companion ships German setup and Repairs texts as well. Documentation remains English and Dutch.
 

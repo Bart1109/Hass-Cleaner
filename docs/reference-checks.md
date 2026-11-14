@@ -114,6 +114,12 @@ On a disposable Home Assistant 2026.9 instance:
 9. Create disposable scene/group/helper/template references. Check both UI-created helpers and YAML packages; verify a legacy group is listed once and changing a helper option removes the old dependency.
 10. Verify an external statistic and a retained statistic whose entity no longer exists. They must not produce missing-entity Repairs. An actually missing statistic should produce a finding; unavailable Recorder access should instead show unknown verification.
 
+## Sidebar panel
+
+The companion adds a read-only panel named **Referenzprüfung** to the sidebar (`mdi:link-variant-off`). It shows the references of the last report — source, source ID, target type, target, path, and whether the target is missing or its verification is unavailable — with filters and a coverage list. The panel only calls the existing `hass_cleaner/references` WebSocket command; it reads nothing from disk and changes nothing.
+
+The panel needs the HTTP layer and the frontend, is limited to administrators, is registered after Home Assistant has started, and is removed when the config entry is unloaded. Its name deliberately differs from the app's own sidebar entry “Hass-Cleaner”, so both stay distinguishable.
+
 ## Nederlands kort
 
 De zeven categorieën uit deel 1 zijn aangesloten, inclusief scènes, groepen, ondersteunde helpers, losse templates en energie/statistieken. Geldige historische/externe statistieken worden niet als verdwenen entiteit gemeld. Zonder Recorder is de statistiekcontrole expliciet onbekend. Niet alle aangepaste helpers of dynamische templates zijn interpreteerbaar; praktijktests blijven nodig voordat dit releaseklaar is.
