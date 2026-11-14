@@ -1,6 +1,8 @@
 # Hass-Cleaner
 
-[Deutsch](#deutsch) · [English](#english) · [Nederlands](#nederlands) · [Wiki](https://github.com/dkwolf1/Hass-Cleaner/wiki) · [Releases](https://github.com/Bart1109/Hass-Cleaner/releases)
+[Deutsch](#deutsch) · [English](#english) · [Nederlands](#nederlands) · [Wiki](https://github.com/Bart1109/Hass-Cleaner/wiki) · [Releases](https://github.com/Bart1109/Hass-Cleaner/releases)
+
+> **Betreuung:** Bart1109 · **Basis:** Hass-Cleaner von [dkwolf1](https://github.com/dkwolf1) · **Maintained by** Bart1109, **powered by** [dkwolf1](https://github.com/dkwolf1)
 
 ## Deutsch
 
@@ -52,7 +54,7 @@ Persönliche oder unsichere Inhalte erfordern eine zusätzliche Bestätigung des
 
 ### Dokumentation
 
-Das [Hass-Cleaner-Wiki](https://github.com/dkwolf1/Hass-Cleaner/wiki) enthält das Benutzerhandbuch, darunter:
+Das [Hass-Cleaner-Wiki](https://github.com/Bart1109/Hass-Cleaner/wiki) enthält das Benutzerhandbuch, darunter:
 
 - Installation und Aktualisierung;
 - der empfohlene erste Scan;
@@ -184,7 +186,7 @@ Personal or uncertain content requires an additional content acknowledgement. Re
 
 ### Documentation
 
-The [Hass-Cleaner Wiki](https://github.com/dkwolf1/Hass-Cleaner/wiki) contains the user guide, including:
+The [Hass-Cleaner Wiki](https://github.com/Bart1109/Hass-Cleaner/wiki) contains the user guide, including:
 
 - installation and updates;
 - the recommended first scan;
@@ -290,7 +292,7 @@ Persoonlijke of onzekere inhoud vereist een extra inhoudsbevestiging. Registerop
 
 ### Documentatie
 
-De [Hass-Cleaner Wiki](https://github.com/dkwolf1/Hass-Cleaner/wiki) bevat de uitgebreide Engelstalige handleiding en een korte Nederlandse snelstart. Onderwerpen zijn onder andere:
+De [Hass-Cleaner Wiki](https://github.com/Bart1109/Hass-Cleaner/wiki) bevat de uitgebreide Engelstalige handleiding en een korte Nederlandse snelstart. Onderwerpen zijn onder andere:
 
 - installatie en updates;
 - de aanbevolen eerste scan;

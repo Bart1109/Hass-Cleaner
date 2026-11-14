@@ -253,7 +253,7 @@ class ReferenceMonitor:
                 },
                 data={"source_id": group["source_id"]},
                 learn_more_url=(
-                    "https://github.com/dkwolf1/Hass-Cleaner/blob/main/docs/reference-checks.md"
+                    "https://github.com/Bart1109/Hass-Cleaner/blob/main/docs/reference-checks.md"
                 ),
             )
 
