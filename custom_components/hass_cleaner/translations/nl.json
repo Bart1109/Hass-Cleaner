@@ -15,5 +15,20 @@
       "title": "Ontbrekende verwijzingen in {source}",
       "description": "Hass-Cleaner vond {count} ontbrekende statische verwijzingen in {source}.\n\n{references}\n\nOpen de genoemde bron in Home Assistant of het betreffende YAML-configuratieonderdeel en controleer deze paden (lijstindexen beginnen bij 0). Corrigeer het doel of herstel de ontbrekende entiteit, het apparaat, de ruimte, actie of statistiek. Verwijder geen historische statistieken om deze melding te verhelpen. Herlaad YAML-wijzigingen indien nodig. De companion controleert binnen vijf minuten opnieuw.\n\nEr is niets automatisch gewijzigd. Dynamische templates, blueprints en aangepaste kaarten kunnen extra verwijzingen verbergen. Een bron met beperkte dekking kan zijn eerdere melding behouden. Je kunt bewuste verwijzingen in Reparaties negeren. Meer dan 30 bevindingen? De volledige lijst staat in de app en exports."
     }
+  },
+  "services": {
+    "refresh": {
+      "name": "Controle nu uitvoeren",
+      "description": "Voert de controle op ontbrekende verwijzingen direct uit en geeft het actuele rapport terug.",
+      "fields": {}
+    }
+  },
+  "exceptions": {
+    "not_loaded": {
+      "message": "Stel Hass-Cleaner Companion eerst in."
+    },
+    "no_report": {
+      "message": "De controle op ontbrekende verwijzingen heeft geen rapport opgeleverd."
+    }
   }
 }

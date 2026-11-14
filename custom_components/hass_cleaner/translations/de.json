@@ -15,5 +15,20 @@
       "title": "Fehlende Verweise in {source}",
       "description": "Hass-Cleaner hat {count} fehlende statische Verweise in {source} gefunden.\n\n{references}\n\nÖffne die genannte Quelle in Home Assistant oder im zugehörigen YAML-Abschnitt und prüfe diese Pfade (Listenindizes beginnen bei 0). Korrigiere das Ziel oder stelle die fehlende Entität, das Gerät, den Bereich, die Aktion oder die Statistik wieder her. Lösche keine historischen Statistiken, um diesen Hinweis zu beheben. Lade YAML-Änderungen bei Bedarf neu. Der Companion prüft innerhalb von fünf Minuten erneut.\n\nEs wurde nichts automatisch geändert. Dynamische Templates, Blueprints und benutzerdefinierte Karten können weitere Abhängigkeiten verbergen. Eine nur teilweise geprüfte Quelle behält gegebenenfalls ihren vorherigen Hinweis. Bewusste Verweise lassen sich unter „Reparaturen“ ignorieren. Bei mehr als 30 Fundstellen steht die vollständige Liste in der App und in den Exporten zur Verfügung."
     }
+  },
+  "services": {
+    "refresh": {
+      "name": "Prüfung jetzt ausführen",
+      "description": "Führt die Prüfung auf fehlende Verweise sofort aus und gibt den aktuellen Bericht zurück.",
+      "fields": {}
+    }
+  },
+  "exceptions": {
+    "not_loaded": {
+      "message": "Bitte richte Hass-Cleaner Companion zuerst ein."
+    },
+    "no_report": {
+      "message": "Die Prüfung auf fehlende Verweise hat keinen Bericht erzeugt."
+    }
   }
 }

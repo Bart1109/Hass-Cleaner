@@ -15,5 +15,20 @@
       "title": "Missing references in {source}",
       "description": "Hass-Cleaner found {count} missing static references in {source}.\n\n{references}\n\nOpen the named source in Home Assistant or its YAML configuration section and review these paths (array indexes start at 0). Correct the target or restore the missing entity, device, area, action or statistic. Do not delete historical statistics to address this issue. Reload YAML changes where needed. The companion checks again within five minutes.\n\nNothing was changed automatically. Dynamic templates, blueprints and custom cards may hide additional dependencies. A partially checked source may retain its previous issue. Ignore intentional references using Repairs. For more than 30 findings, the complete list is available in the app and exports."
     }
+  },
+  "services": {
+    "refresh": {
+      "name": "Run reference check",
+      "description": "Runs the missing-reference check immediately and returns the current report.",
+      "fields": {}
+    }
+  },
+  "exceptions": {
+    "not_loaded": {
+      "message": "Set up Hass-Cleaner Companion first."
+    },
+    "no_report": {
+      "message": "The reference check did not produce a report."
+    }
   }
 }

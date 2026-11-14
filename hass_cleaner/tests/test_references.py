@@ -19,10 +19,9 @@ from hass_cleaner.settings import Settings
 from hass_cleaner.reporting import _write_csv
 from tests.test_registry_audit import FakeConnection
 
-COMPANION = Path(__file__).resolve().parents[2] / "custom_components" / "hass_cleaner"
-spec = importlib.util.spec_from_file_location("reference_analyzer", COMPANION / "references.py")
-analyzer = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(analyzer)
+from tests.companion_package import COMPANION, load
+
+analyzer = load("references")
 
 
 def source(config, kind="automation", source_id="automation.test"):

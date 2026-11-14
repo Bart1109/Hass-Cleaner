@@ -5,6 +5,16 @@ import hashlib
 import re
 from datetime import datetime, timezone
 
+from .const import (
+    ISSUE_PREFIX,
+    MAX_TEMPLATE_LENGTH,
+    MAX_WALK_DEPTH,
+    MAX_WALK_NODES,
+    SCHEMA_VERSION,
+)
+
+_JINJA_ENVIRONMENT = None
+
 ENTITY = re.compile(r"[a-z_][a-z0-9_]*\.[a-z0-9_]+\Z")
 DEVICE = re.compile(r"[a-f0-9]{32}\Z")
 KEY_TYPES = {"entity_id": "entity", "entity": "entity", "device_id": "device", "area_id": "area"}
@@ -15,11 +25,22 @@ STATISTIC_KEYS = {"statistic_id", "statistic_ids", "stat_energy_from", "stat_ene
                   "stat_rate_from", "stat_rate_to", "stat_soc"}
 
 
+def _jinja_environment():
+    """Eine gemeinsame Umgebung: ein neues Environment je Template kostet Zeit."""
+    global _JINJA_ENVIRONMENT
+    if _JINJA_ENVIRONMENT is None:
+        from jinja2 import Environment
+
+        _JINJA_ENVIRONMENT = Environment()
+    return _JINJA_ENVIRONMENT
+
+
 def template_entities(value):
     """Inspect syntax only; quoted examples/comments are not dependencies."""
-    from jinja2 import Environment, nodes, TemplateSyntaxError
+    from jinja2 import TemplateSyntaxError, nodes
+
     try:
-        tree = Environment().parse(value)
+        tree = _jinja_environment().parse(value)
     except TemplateSyntaxError:
         return set()
     result = set()
@@ -83,7 +104,7 @@ def analyze(sources, known):
         def walk(value, location="$", key="", depth=0, statistic_context=False):
             nonlocal visited
             visited += 1
-            if visited > 100000 or depth > 60:
+            if visited > MAX_WALK_NODES or depth > MAX_WALK_DEPTH:
                 record["status"] = "partial"
                 return
             if isinstance(value, dict):
@@ -100,13 +121,13 @@ def analyze(sources, known):
                 if any(key in value for key in ("use_blueprint", "strategy", "label_id", "floor_id", "entity_globs", "domains")):
                     record["status"] = "partial"
                 for child_key, child in value.items():
-                    if visited > 100000:
+                    if visited > MAX_WALK_NODES:
                         break
                     # Keys, not contents: output never contains credentials or template text.
                     walk(child, f"{location}.{child_key}", str(child_key), depth + 1, statistic_context)
             elif isinstance(value, (list, tuple)):
                 for index, child in enumerate(value):
-                    if visited > 100000:
+                    if visited > MAX_WALK_NODES:
                         break
                     walk(child, f"{location}[{index}]", key, depth + 1, statistic_context)
             else:
@@ -120,7 +141,7 @@ def analyze(sources, known):
                             record["status"] = "partial"
                         return
                     record["dynamic"] += 1
-                    if len(value) > 65536:
+                    if len(value) > MAX_TEMPLATE_LENGTH:
                         return
                     for target in template_entities(value):
                         add("entity", target, location)
@@ -155,7 +176,7 @@ def analyze(sources, known):
         coverage.append(record)
     references.sort(key=lambda r: (r["source_id"], r["location"], r["target_id"]))
     missing = [item for item in references if item["missing"]]
-    return {"schema_version": 1, "status": "partial" if any(s["status"] != "checked" for s in coverage) else "completed",
+    return {"schema_version": SCHEMA_VERSION, "status": "partial" if any(s["status"] != "checked" for s in coverage) else "completed",
         "checked_at": datetime.now(timezone.utc).isoformat(), "sources": coverage, "references": references,
         "summary": {"sources": len(coverage), "references": len(references), "missing": len(missing),
                     "partial_sources": sum(s["status"] != "checked" for s in coverage)},
@@ -171,7 +192,7 @@ def repair_groups(report):
         if not reference["missing"]:
             continue
         source_id = reference["source_id"]
-        issue_id = "reference_" + hashlib.sha256(source_id.encode()).hexdigest()[:24]
+        issue_id = ISSUE_PREFIX + hashlib.sha256(source_id.encode()).hexdigest()[:24]
         group = groups.setdefault(issue_id, {"source_id": source_id, "source": reference["source_name"], "items": []})
         group["items"].append(f"{reference['target_type']} {reference['target_id']} — {reference['location']}")
     return groups

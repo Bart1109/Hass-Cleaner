@@ -16,11 +16,20 @@ def load_companion():
     identity = lambda func: func
     ws = SimpleNamespace(websocket_command=lambda schema: identity, async_response=identity,
                          async_register_command=Mock())
+    # The panel needs the frontend and the HTTP layer; the contract tests only
+    # verify that setup asks for the panel, not how Home Assistant renders it.
+    panel_custom = SimpleNamespace(async_register_panel=Mock(return_value=None))
+    frontend = SimpleNamespace(async_remove_panel=Mock())
+    http = SimpleNamespace(StaticPathConfig=lambda *args, **kwargs: SimpleNamespace(args=args, kwargs=kwargs))
     modules = {
         "homeassistant": SimpleNamespace(),
-        "homeassistant.components": SimpleNamespace(websocket_api=ws),
+        "homeassistant.components": SimpleNamespace(websocket_api=ws, frontend=frontend, panel_custom=panel_custom),
+        "homeassistant.components.http": http,
         "homeassistant.const": SimpleNamespace(EVENT_HOMEASSISTANT_STARTED="started"),
-        "homeassistant.core": SimpleNamespace(callback=identity),
+        "homeassistant.core": SimpleNamespace(callback=identity, HomeAssistant=object, ServiceCall=object,
+                                              SupportsResponse=SimpleNamespace(OPTIONAL="optional")),
+        "homeassistant.exceptions": SimpleNamespace(
+            HomeAssistantError=type("HomeAssistantError", (Exception,), {})),
         "homeassistant.helpers": SimpleNamespace(area_registry=SimpleNamespace(), device_registry=SimpleNamespace(),
                                                   entity_registry=SimpleNamespace(), issue_registry=SimpleNamespace()),
         "homeassistant.helpers.event": SimpleNamespace(async_track_time_interval=Mock()),
@@ -151,6 +160,15 @@ class CompanionTests(unittest.IsolatedAsyncioTestCase):
         await self.monitor.refresh()
         self.hass.async_add_executor_job.assert_not_awaited()
         self.assertEqual([("spook", "reference_test")], list(self.issues))
+
+    async def test_setup_entry_registers_the_sidebar_panel(self):
+        self.hass.is_running = False
+        self.hass.bus = SimpleNamespace(async_listen_once=Mock())
+        entry = SimpleNamespace(async_on_unload=Mock())
+        with patch.object(self.companion, "async_register_panel", AsyncMock(return_value=True)) as register, \
+                patch.object(self.companion, "async_track_time_interval", Mock()):
+            self.assertTrue(await self.companion.async_setup_entry(self.hass, entry))
+        register.assert_awaited_once()
 
     async def test_translation_placeholders_match(self):
         from hass_cleaner import __version__

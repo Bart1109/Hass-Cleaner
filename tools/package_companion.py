@@ -10,7 +10,8 @@ def build():
     version = json.loads((source / "manifest.json").read_text(encoding="utf-8"))["version"]
     destination = root / "dist" / f"hass-cleaner-companion-{version}.zip"
     destination.parent.mkdir(exist_ok=True)
-    paths = sorted([*source.glob("*.py"), *source.glob("*.json"), *source.glob("translations/*.json"), *source.glob("brand/*.png")])
+    paths = sorted([*source.glob("*.py"), *source.glob("*.json"), *source.glob("translations/*.json"),
+                    *source.glob("brand/*.png"), *source.glob("www/*.js")])
     with ZipFile(destination, "w", ZIP_DEFLATED) as archive:
         for path in paths:
             archive.write(path, path.relative_to(root).as_posix())
@@ -18,6 +19,8 @@ def build():
     with ZipFile(destination) as archive:
         assert archive.testzip() is None
         assert "custom_components/hass_cleaner/manifest.json" in archive.namelist()
+        # The sidebar panel asset is served from the integration directory.
+        assert "custom_components/hass_cleaner/www/hass-cleaner-panel.js" in archive.namelist()
     print(destination)
 
 

@@ -9,7 +9,7 @@ HELPERS = frozenset({"group", "template", "min_max", "integration", "utility_met
 def yaml_sources(config):
     """HA's loader resolves includes/packages; never return unrelated configuration."""
     result = []
-    for section, value in config.items():
+    for section, value in (config or {}).items():
         domain = str(section).split(" ", 1)[0]
         if domain == "recorder" and isinstance(value, dict):
             result.append({"id": f"yaml:{section}", "kind": "statistics", "name": "Recorder entity filters",
