@@ -59,6 +59,18 @@ function confirmationText(en, nl, de) {
   return locale === "en" ? en : nl;
 }
 
+// A verified backup is only a real option once Home Assistant confirmed one.
+// Preselecting it without evidence locked the execute button for good.
+function syncBackupChoice(name, verifiedAvailable) {
+  const verified = $(`input[name="${name}"][value="verified"]`);
+  if (!verified) return false;
+  verified.disabled = !verifiedAvailable;
+  if (verifiedAvailable || !verified.checked) return false;
+  const manual = $(`input[name="${name}"][value="manual"]`);
+  if (manual) manual.checked = true;
+  return true;
+}
+
 function referenceWarning() {
   return referenceText("Scan snapshot only. Device and area targets indicate potential indirect use. Dynamic templates, blueprints and custom cards may hide dependencies. No references found does not mean removal is safe.", "Alleen een scanmomentopname. Apparaat- en ruimtedoelen tonen mogelijk indirect gebruik. Dynamische templates, blueprints en aangepaste kaarten kunnen verwijzingen verbergen. Geen verwijzingen gevonden betekent niet dat verwijderen veilig is.");
 }
@@ -1073,7 +1085,7 @@ function openQuarantineExecution() {
   const hasReview = (state.latestPlan?.plan?.files || []).some((item) => item.risk === "review");
   $("#quarantine-content-risk-row").classList.toggle("hidden", !hasReview);
   $("#quarantine-content-risk-ack").checked = !hasReview;
-  $('input[name="quarantine-backup-choice"][value="verified"]').checked = true;
+  syncBackupChoice("quarantine-backup-choice", state.backupVerified);
   renderBackupEvidence();
   updateQuarantineChoice();
   $("#plan-dialog").close();
@@ -1089,6 +1101,7 @@ function renderBackupEvidence() {
     $("#quarantine-backup-status").textContent = "Nog geen recente back-upaanvraag gevonden. Een back-up is sterk aanbevolen.";
   }
   $("#quarantine-verify-button").disabled = !state.backupEvidenceToken || state.backupVerified;
+  if (syncBackupChoice("quarantine-backup-choice", state.backupVerified)) updateQuarantineChoice();
 }
 
 async function loadBackupEvidence() {
@@ -1190,7 +1203,7 @@ function openRegistryExecution() {
   );
   $("#registry-confirmation").value = "";
   $("#registry-risk-ack").checked = false;
-  $('input[name="registry-backup-choice"][value="verified"]').checked = true;
+  syncBackupChoice("registry-backup-choice", state.backupVerified);
   updateRegistryExecuteButton();
   $("#plan-dialog").close();
   $("#registry-execution-dialog").showModal();
@@ -1221,6 +1234,7 @@ async function verifyRegistryBackup() {
     state.backupVerified = response.status === "completed";
     showToast(state.backupVerified ? "Back-up voltooid en geverifieerd" : `Back-upstatus: ${response.status}`);
   } catch (error) { showToast(error.message, true); }
+  syncBackupChoice("registry-backup-choice", state.backupVerified);
   updateRegistryExecuteButton();
 }
 
@@ -1323,9 +1337,24 @@ function openPurgeDialog() {
     showToast("Kies 1 tot en met 365 dagen", true);
     return;
   }
-  const extras = [$("#purge-repack").checked ? "database herverpakken" : "niet herverpakken", $("#purge-apply-filter").checked ? "filters toepassen" : "filters niet toepassen"];
-  $("#purge-dialog-summary").textContent = `Alle Recorder-historie ouder dan ${keepDays} dagen wordt permanent verwijderd; ${extras.join("; ")}.`;
+  const repack = $("#purge-repack").checked;
+  const applyFilter = $("#purge-apply-filter").checked;
+  const extras = confirmationText(
+    [repack ? "repack the database" : "do not repack", applyFilter ? "apply filters" : "do not apply filters"],
+    [repack ? "database herverpakken" : "niet herverpakken", applyFilter ? "filters toepassen" : "filters niet toepassen"],
+    [repack ? "Datenbank neu verpacken" : "Datenbank nicht neu verpacken", applyFilter ? "Filter anwenden" : "Filter nicht anwenden"]
+  );
+  $("#purge-dialog-summary").textContent = confirmationText(
+    `All Recorder history older than ${keepDays} days is permanently deleted; ${extras.join("; ")}.`,
+    `Alle Recorder-historie ouder dan ${keepDays} dagen wordt permanent verwijderd; ${extras.join("; ")}.`,
+    `Die gesamte Recorder-Historie, die älter als ${keepDays} Tage ist, wird endgültig gelöscht; ${extras.join("; ")}.`
+  );
   $("#purge-confirmation").value = "";
+  $("#purge-confirmation").closest("label").querySelector("span").innerHTML = confirmationText(
+    "Type <strong>PURGE</strong> to confirm",
+    "Typ <strong>PURGE</strong> ter bevestiging",
+    "Zur Bestätigung <strong>PURGE</strong> eingeben"
+  );
   $("#purge-backup-confirmed").checked = false;
   state.backupEvidenceToken = "";
   $("#purge-backup-button").textContent = "Eerst volledige back-up starten";

@@ -49,6 +49,7 @@
     "Bestandstype en producer zijn herkend.": "The file type and producer are recognised.", "De ingestelde minimumleeftijd is gehaald.": "The configured minimum age has been reached.", "Geen actieve verwijzing verwacht.": "No active reference is expected.", "Gebruik door dashboards, automatiseringen of de integratie is niet uitgesloten.": "Use by dashboards, automations or the integration has not been ruled out.", "Quarantaine of automatische herbouw is mogelijk.": "Quarantine or automatic rebuilding is available.", "Automatische herbouw of herstel is niet bewezen.": "Automatic rebuilding or recovery is not known.", "Kan aan de opschoning worden toegevoegd.": "Can be added to the cleanup.", "Beoordeel risico en herstel; alleen de gebruiker kan bepalen of deze inhoud gemist kan worden.": "Review the risk and recovery options; only the user can decide whether this content is still needed.",
     "Python-cache": "Python cache", "Python-cache zonder bron": "Python cache without source", "Editorrestant": "Editor leftover", "Tijdelijk / back-up": "Temporary / backup", "Oud logbestand": "Old log file", "Custom component": "Custom component", "HACS/frontendpakket": "HACS/frontend package", "Dashboard-/webbestand": "Dashboard/web file", "Mogelijke integratiecache": "Possible integration cache", "Kernconfiguratie": "Core configuration", "Symbolische link": "Symbolic link",
     "Entity zonder apparaat": "Entity without device", "Ontbrekend apparaat": "Missing device", "Ontbrekend gebied": "Missing area", "Ontbrekende config-entry": "Missing config entry", "Ontbrekend bovenliggend apparaat": "Missing parent device", "Entity niet geladen": "Entity not loaded", "Uitgeschakelde entity": "Disabled entity", "Apparaat zonder entities": "Device without entities", "Leeg gebied": "Empty area",
+    "Aanbevolen. Je kunt een eerder gestarte recente back-up hergebruiken.": "Recommended. You can reuse a recently started backup.", "Gebruik dit als je in Home Assistant hebt vastgesteld dat de back-up voltooid is.": "Use this if you confirmed in Home Assistant that the backup finished.", "Sterk afgeraden; herstel is dan beperkt tot de quarantainekopie.": "Strongly discouraged; recovery is then limited to the quarantine copy.", "Aanbevolen.": "Recommended.", "Je hebt de voltooiing in Home Assistant gecontroleerd.": "You checked completion in Home Assistant.", "Sterk afgeraden en volledig eigen risico.": "Strongly discouraged and entirely at your own risk.", "Gebruikerskeuze met systeemrisico": "User choice with system risk", "Typ de bevestiging": "Enter the confirmation", "Purge aanvragen...": "Requesting purge...", "Voer eerst een scan uit": "Run a scan first", "Bij herverpakken kan tijdelijk minstens ongeveer de databasegrootte aan vrije opslag nodig zijn.": "Repacking can temporarily need at least about the database size in free space.", "Alles selecteren": "Select all", "Back-up is voltooid en geverifieerd": "Backup completed and verified", "Back-up voltooid en geverifieerd": "Backup completed and verified", "Back-up is nog bezig": "Backup is still running",
     "Aan opschoning toevoegen": "Add to cleanup", "Uit opschoning verwijderen": "Remove from cleanup", "Geen opruimcategorieën gevonden. Je systeeminventaris blijft behouden.": "No cleanup categories found. Your system inventory remains protected.", "Aanbevolen": "Recommended", "Eigen beoordeling": "Your review", "VEILIG RECEPT": "RECOMMENDED CATEGORY", "EERST ONDERZOEKEN": "REVIEW FIRST", "Veiligheidscontrole": "Safety checks", "Producenten, voorbeelden en advies": "Producers, examples and guidance",
     "Opschoning voorbereid": "Cleanup prepared", "Opschoning voorbereiden...": "Preparing cleanup...", "Opschoning opslaan": "Save cleanup preparation", "Opschoning voorbereid. De gebruiker kiest na advies, back-upafweging en bevestiging welke acties worden uitgevoerd.": "Cleanup prepared. After reviewing guidance, backup options and confirmation, the user chooses which actions to execute.",
     "Geen integratiespecifieke signalen": "No integration-specific signals", "Officiële relaties": "Official relationships", "Geen relaties gevonden. Dat is nog geen verwijderbewijs.": "No relationships found. That does not prove removal is safe.", "Algemene bundelanalyse tonen": "Show general bundle analysis", "Apparaten": "Devices", "Herstel": "Recovery", "Mogelijke gevolgen": "Possible consequences", "Aanbevolen eerste stap": "Recommended first step", "Veilige inhoudspreview": "Safe content preview", "Waarden die gevoelig kunnen zijn worden niet opgenomen.": "Potentially sensitive values are not included.",
@@ -749,6 +750,23 @@
     "unavailable": "nicht verfügbar",
     "updating Repairs": "Reparaturen werden aktualisiert",
     "verification unavailable": "Prüfung nicht verfügbar",
+    // Backup choices, confirmation frames and status texts
+    "Recommended. You can reuse a recently started backup.": "Empfohlen. Ein kürzlich gestartetes Backup lässt sich wiederverwenden.",
+    "Use this if you confirmed in Home Assistant that the backup finished.": "Wähle dies, wenn du in Home Assistant bestätigt hast, dass das Backup abgeschlossen ist.",
+    "Strongly discouraged; recovery is then limited to the quarantine copy.": "Dringend abgeraten; die Wiederherstellung ist dann auf die Quarantänekopie beschränkt.",
+    "Recommended.": "Empfohlen.",
+    "You checked completion in Home Assistant.": "Du hast den Abschluss in Home Assistant geprüft.",
+    "Strongly discouraged and entirely at your own risk.": "Dringend abgeraten und vollständig auf eigenes Risiko.",
+    "User choice with system risk": "Nutzerentscheidung mit Systemrisiko",
+    "Enter the confirmation": "Bestätigung eingeben",
+    "Requesting purge...": "Bereinigung wird angefordert …",
+    "Run a scan first": "Zuerst einen Scan ausführen",
+    "Repacking can temporarily need at least about the database size in free space.": "Neuverpacken kann vorübergehend mindestens etwa die Datenbankgröße an freiem Speicher benötigen.",
+    "Select all": "Alle auswählen",
+    "Backup completed and verified": "Backup abgeschlossen und geprüft",
+    "Backup is still running": "Backup läuft noch",
+    "read-only scan": "schreibgeschützter Scan",
+    "HOME ASSISTANT APP": "HOME-ASSISTANT-APP",
   };
   const originals = new WeakMap();
   const rendered = new WeakMap();

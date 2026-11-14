@@ -4,7 +4,7 @@
 
 ## Deutsch
 
-Aktuell veröffentlichte Version: **1.2.0**, einschließlich Referenzprüfung, Reparaturhinweisen, HACS-Unterstützung, deutscher Oberfläche samt Exporten und dem schreibgeschützten Seitenleisten-Panel „Referenzprüfung“ des Companion. 1.2.1 brachte deutsche Dokumentation, Verweise auf dieses Repository und die Betreuung durch Bart1109. 1.2.2 lieferte das eigene Container-Image, damit die App wieder installierbar ist. Dieser Stand bereitet **1.2.3** vor: deutsche Bestätigungstexte und deutsche Berichts-Downloads. Alle Releases bleiben für kontrollierte frühe Tests gedacht, nicht als Sicherheitsgarantie. Siehe [das Changelog](hass_cleaner/CHANGELOG.md).
+Aktuell veröffentlichte Version: **1.2.0**, einschließlich Referenzprüfung, Reparaturhinweisen, HACS-Unterstützung, deutscher Oberfläche samt Exporten und dem schreibgeschützten Seitenleisten-Panel „Referenzprüfung“ des Companion. 1.2.1 brachte deutsche Dokumentation, Verweise auf dieses Repository und die Betreuung durch Bart1109. 1.2.2 lieferte das eigene Container-Image, damit die App wieder installierbar ist. 1.2.3 brachte deutsche Bestätigungstexte und Berichts-Downloads. Dieser Stand bereitet **1.2.4** vor: freigegebene Ausführung trotz fehlendem geprüftem Backup und deutsche Texte in allen Dialogen. Alle Releases bleiben für kontrollierte frühe Tests gedacht, nicht als Sicherheitsgarantie. Siehe [das Changelog](hass_cleaner/CHANGELOG.md).
 
 ### Grundsatz
 
@@ -27,7 +27,8 @@ Sicherheit geht vor zusätzlichem Aufräumgewinn. Ein Release erfolgt erst, wenn
 | 1.2.0 | Veröffentlicht | Atomare Quarantäne, Diagnostik, Aktualisierung der Listen, Dokumentation und Übersetzungen, deutsche Oberfläche und das Seitenleisten-Panel „Referenzprüfung“ des Companion. |
 | 1.2.1 | Veröffentlicht | Deutsche Dokumentation, Repository- und Betreuungsverweise auf Bart1109; keine funktionale Änderung. |
 | 1.2.2 | Veröffentlicht | App-Image aus `ghcr.io/bart1109/hass-cleaner` statt aus dem Original-Namespace. |
-| 1.2.3 | Vorbereitet | Deutsche Texte in den Bestätigungsdialogen, deutsche Berichts-Downloads aus der Oberfläche. |
+| 1.2.3 | Veröffentlicht | Deutsche Texte in den Bestätigungsdialogen, deutsche Berichts-Downloads aus der Oberfläche. |
+| 1.2.4 | Vorbereitet | Ausführen-Knopf bleibt bei fehlendem geprüftem Backup nicht mehr gesperrt; restliche Dialogtexte deutsch. |
 
 ### Praktische Prüfung für frühe Tester
 
@@ -82,7 +83,8 @@ Veiligheid gaat vóór extra opruimwinst. Een release gaat pas door wanneer risi
 | 1.2.0 | Uitgebracht | Atomaire quarantaine, diagnostiek, lijstverversing, documentatie/vertalingen, Duitse interface en het zijpaneel “Referenzprüfung” van de companion. |
 | 1.2.1 | Uitgebracht | Duitse documentatie en verwijzingen naar Bart1109; geen functionele wijziging. |
 | 1.2.2 | Uitgebracht | App-image van `ghcr.io/bart1109/hass-cleaner`. |
-| 1.2.3 | Voorbereid | Duitse teksten in bevestigingsdialogen en Duitse rapportdownloads. |
+| 1.2.3 | Uitgebracht | Duitse teksten in bevestigingsdialogen en Duitse rapportdownloads. |
+| 1.2.4 | Voorbereid | Uitvoerknop niet meer geblokkeerd zonder geverifieerde back-up; overige dialoogteksten Duits. |
 
 ### Praktijkcontrole voor vroege testers
 
@@ -118,7 +120,7 @@ Veiligheid gaat vóór extra opruimwinst. Een release gaat pas door wanneer risi
 
 ## English
 
-Current published release: **1.2.0**, including reference checks, Repairs, HACS support, a German interface with German exports and the companion's read-only “Referenzprüfung” sidebar panel. Version 1.2.1 brought German documentation, repository links and maintenance by Bart1109. Version 1.2.2 shipped its own container image so the app could be installed again. This checkout prepares **1.2.3**: German confirmation texts and German report downloads. All releases remain intended for controlled early testing, not a guarantee of safety. See [the changelog](hass_cleaner/CHANGELOG.md).
+Current published release: **1.2.0**, including reference checks, Repairs, HACS support, a German interface with German exports and the companion's read-only “Referenzprüfung” sidebar panel. Version 1.2.1 brought German documentation, repository links and maintenance by Bart1109. Version 1.2.2 shipped its own container image so the app could be installed again. Version 1.2.3 added German confirmation texts and report downloads. This checkout prepares **1.2.4**: the execute button is no longer locked without a verified backup, and all dialog texts are German. All releases remain intended for controlled early testing, not a guarantee of safety. See [the changelog](hass_cleaner/CHANGELOG.md).
 
 ### Principle
 
@@ -141,7 +143,8 @@ Safety takes priority over reclaimed space. A release proceeds only when risky s
 | 1.2.0 | Released | Atomic quarantine, diagnostics, list refresh, documentation/translations, German interface and the companion's “Referenzprüfung” sidebar panel. |
 | 1.2.1 | Released | German documentation, repository and maintainer links for Bart1109; no functional change. |
 | 1.2.2 | Released | App image from `ghcr.io/bart1109/hass-cleaner`. |
-| 1.2.3 | Prepared | German texts in the confirmation dialogs and German report downloads. |
+| 1.2.3 | Released | German texts in the confirmation dialogs and German report downloads. |
+| 1.2.4 | Prepared | Execute button no longer locked without a verified backup; remaining dialog texts in German. |
 
 ### Practical checks for early testers
 

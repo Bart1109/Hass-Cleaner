@@ -2,7 +2,12 @@
 
 > Ältere Einträge stehen in der Sprache ihrer Veröffentlichung.
 
-## 1.2.3 — Unveröffentlicht
+## 1.2.4 — Unveröffentlicht
+
+- Der Ausführen-Knopf im Quarantäne- und im Registerdialog blieb dauerhaft gesperrt, solange kein von Hass-Cleaner geprüftes Backup vorlag: Die Option „geprüftes Backup“ war immer vorausgewählt, ließ sich ohne Nachweis aber nie erfüllen. Sie wird jetzt deaktiviert, stattdessen wird „selbst geprüftes Backup“ gewählt; nach erfolgreicher Prüfung ist sie wieder wählbar.
+- Weitere Dialogtexte auf Deutsch: Backup-Optionen, Zusammenfassung und Bestätigungsrahmen der Recorder-Bereinigung, Sammelauswahl, Toasts zum Backup-Status sowie „read-only scan“ und das Etikett „HOME ASSISTANT APP“.
+
+## 1.2.3 — 2026-11-14
 
 - Bestätigungsdialoge auf Deutsch: Quarantäne, Registeraufräumen, Wiederherstellen, endgültiges Löschen sowie das Leeren von Historie und Protokoll trugen im deutschen Interface englischen Text („Type QUARANTINE to confirm“), weil sie Markup und Zähler enthalten und deshalb nicht über das Wörterbuch erreichbar waren. Sie haben jetzt eigene deutsche Formulierungen; die Bestätigungswörter selbst bleiben unverändert.
 - Berichts-Download aus der Oberfläche forderte die Sprache `en` an; er nutzt jetzt die tatsächlich angezeigte Sprache, sodass deutsche Berichte direkt geladen werden.
