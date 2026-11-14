@@ -5,7 +5,7 @@ import threading
 import uuid
 import json
 import hashlib
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass, field, replace
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -243,22 +243,25 @@ class ScanManager:
             completed = scan_tree(self.root, settings, scan_id, result=current)
             if completed.status == "completed":
                 # The result object is shared with the interface, so it must not
-                # look finished while the registry audit and the reports still
-                # run; another operation would act on a half-finished scan.
+                # look finished before the audit, the report and the history
+                # entry exist; another operation would act on a half-finished
+                # scan. Reports are written from a copy that already carries the
+                # final status.
                 completed.status = "running"
+                completed.finished_at = ""
                 completed.registry_audit = self.registry_scanner()
                 if self.report_dir is not None:
                     apply_availability_history(
                         completed.registry_audit,
                         self.report_dir.parent / "availability-history.json",
                     )
-                completed.status = "completed"
-            if completed.status == "completed" and self.report_dir is not None:
-                from .reporting import prune_report_files, write_report_files
+                    from .reporting import prune_report_files, write_report_files
 
-                write_report_files(completed, settings, self.report_dir)
-                prune_report_files(self.report_dir, settings.report_retention_count)
-                self._append_history(completed)
+                    reportable = replace(completed, status="completed")
+                    write_report_files(reportable, settings, self.report_dir)
+                    prune_report_files(self.report_dir, settings.report_retention_count)
+                    self._append_history(reportable)
+                completed.status = "completed"
         except Exception as exc:
             completed.status = "failed"
             completed.error = f"{type(exc).__name__}: {exc}"

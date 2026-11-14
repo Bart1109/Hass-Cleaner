@@ -2,7 +2,13 @@
 
 > Ältere Einträge stehen in der Sprache ihrer Veröffentlichung.
 
-## 1.2.7 — Unveröffentlicht
+## 1.2.8 — Unveröffentlicht
+
+- Die Companion-Integration trägt dieselbe Version; inhaltlich ändert sich an
+  der App nichts. Das Seitenleisten-Panel des Companion heißt jetzt in jeder
+  Sprache richtig („Referenzprüfung“, „Reference checks“, „Referentiecontrole“).
+
+## 1.2.7 — 2026-11-14
 
 - **Echte Fortschrittsanzeige beim Scan.** Der Scanner zählt die Dateien vorab (reine Metadaten, rund 8 ms pro 8 000 Dateien) und meldet Gesamtzahl und Stand laufend. Die Oberfläche zeigt Prozentwert, Balken, „x von y Dateien geprüft“, den aktuellen Ordner, die beiden Schritte (Dateien zählen / Dateien prüfen), die verstrichene Zeit und eine geschätzte Restzeit.
 - **Behoben:** Der laufende Scan war über die API nicht beobachtbar — der Scan-Manager lieferte ein Platzhalterobjekt, während ein zweites Objekt befüllt wurde. Fortschritt blieb deshalb bis zum Ende bei null. `scan_tree` befüllt jetzt das Objekt, das der Endpunkt bereits ausliefert.
