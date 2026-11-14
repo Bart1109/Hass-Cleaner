@@ -1,4 +1,12 @@
-# Securitybeleid
+# Sicherheitsrichtlinie
+
+Melde Sicherheitsprobleme nicht in einem öffentlichen Issue. Nutze GitHub **Security → Report a vulnerability** in diesem Repository.
+
+Nenne wenn möglich die Hass-Cleaner-Version, die Home-Assistant-Version, relevante Protokollzeilen ohne Token oder Secrets und ein reproduzierbares Szenario. Teile keine vollständigen Prüfberichte, wenn darin persönliche Entitätsnamen oder Pfade stehen.
+
+Nur die neueste Version erhält Sicherheitsupdates. Hass-Cleaner entfernt in der experimentellen Reihe keine Dateien, Entitäten oder Geräte. Die separate Recorder-Bereinigung nutzt die offizielle Home-Assistant-Aktion und verlangt eine ausdrückliche Bestätigung.
+
+## Nederlands
 
 Meld beveiligingsproblemen niet in een openbaar issue. Gebruik GitHub **Security → Report a vulnerability** in deze repository.
 

@@ -1,8 +1,60 @@
 # Hass-Cleaner Roadmap
 
-[English](#english) · [Nederlands](#nederlands)
+[Deutsch](#deutsch) · [English](#english) · [Nederlands](#nederlands)
 
-Current published release: **1.1.1**, including reference checks, Repairs and HACS support. This checkout prepares **1.2.0**: quarantine concurrency protection, reference diagnostics, list refresh fixes, documentation/translation corrections, a German interface and exports, and the companion's read-only “Referenzprüfung” sidebar panel. All releases remain intended for controlled early testing, not a guarantee of safety. See [the changelog](hass_cleaner/CHANGELOG.md).
+## Deutsch
+
+Aktuell veröffentlichte Version: **1.1.1**, einschließlich Referenzprüfung, Reparaturhinweisen und HACS-Unterstützung. Dieser Stand bereitet **1.2.0** vor: Schutz vor gleichzeitigen Quarantänevorgängen, Referenzdiagnostik, Korrekturen beim Aktualisieren von Listen, Berichtigungen an Dokumentation und Übersetzungen, eine deutsche Oberfläche samt Exporten sowie das schreibgeschützte Seitenleisten-Panel „Referenzprüfung“ des Companion. Alle Releases bleiben für kontrollierte frühe Tests gedacht, nicht als Sicherheitsgarantie. Siehe [das Changelog](hass_cleaner/CHANGELOG.md).
+
+### Grundsatz
+
+Sicherheit geht vor zusätzlichem Aufräumgewinn. Ein Release erfolgt erst, wenn riskante Situationen nachweislich blockiert werden und die Wiederherstellung getestet werden kann.
+
+### Abgeschlossen
+
+| Version | Status | Inhalt |
+|---|---|---|
+| 0.7.2 | Abgeschlossen | Verlässliche Zeitmessung, Unterschiede zwischen Scans, gespeicherte Nutzerentscheidungen, Sicherheitsvorkehrungen und Seitennavigation/Performance. |
+| 0.7.3 | Abgeschlossen | Klarere Entitätssignale, kompakte Bündel und getrennte Behandlung von temporären, dauerhaften, `unavailable`-, `unknown`- und integrationsspezifischen Problemen. |
+| 0.8.0 | Abgeschlossen | Funktionierende Quarantäne für nachweislich sichere Dateien, Stapelprüfung, SHA-256-Manifeste und sichere Wiederherstellung. |
+| 0.9.0 | Abgeschlossen | Überprüfung der Supervisor-Sicherung, Wiederherstellungstest, Aufbewahrungsfrist und ausdrückliches Löschen nach Ablauf. |
+| 0.9.1 | Abgeschlossen | Zulässige Sicherungsprüfung, wiederverwendbarer Nachweis, bewusste optionale Sicherungswahl und auswählbare Entitätsprüfung. |
+| 1.0.0 | Veröffentlicht | Vom Nutzer gesteuerte Bereinigung, Ausführung im Register, persönliche Inhalte, sauberer Start und harter Schutz des Kemsystems. |
+| 1.0.1 | Veröffentlicht | Technische Härtung: absturzsichere Ausführung, Seitennavigation, atomare Speicherung, Barrierefreiheit und verlässliches Frontend-Caching. |
+| 1.0.2 | Veröffentlicht | Wiederherstellungs- und Registerjournale, sichere Konfigurationssynchronisierung, begrenzter Scan-Speicher, robuste Anfrageprüfung und verbesserte zweisprachige Exporte. |
+| 1.1.0 | Veröffentlicht | Companion mit Referenzprüfung und nativen Reparaturhinweisen. |
+| 1.1.1 | Veröffentlicht | HACS-Installation und Anleitungen. |
+| 1.2.0 | Vorbereitet | Atomare Quarantäne, Diagnostik, Aktualisierung der Listen, Dokumentation und Übersetzungen, deutsche Oberfläche und das Seitenleisten-Panel „Referenzprüfung“ des Companion. |
+
+### Praktische Prüfung für frühe Tester
+
+- Das neue Release über den echten GitHub-/GHCR- und HACS-Ablauf installieren oder aktualisieren.
+- Eine vollständige Sicherung starten und den Abschluss auf Home Assistant OS prüfen.
+- Sowohl eine sichere Datei als auch einen bewusst akzeptierten Prüfkandidaten in die Quarantäne verschieben.
+- Den Wiederherstellungstest ausführen und dieselbe Datei tatsächlich zurückspielen.
+- Prüfen, dass eine geänderte oder geschützte Datei und eine falsche Bestätigung blockiert werden.
+- Eine kleine Gruppe von Testentitäten entfernen und die Wiederherstellung aus einer Home-Assistant-Sicherung üben.
+- Die Recorder-Bereinigung mit einer kleinen, sicheren Testkonfiguration prüfen.
+- Die Oberfläche auf Desktop und Mobilgerät testen.
+- Die niederländische, englische und deutsche Ingress-Oberfläche samt automatischer Sprachwahl in Regressionstests weiter abdecken.
+- Nutzertests mit mehreren Integrationen und Speicherprofilen durchführen.
+- Bekannte Probleme dokumentieren und jeden releaseblockierenden Fehler beheben.
+
+### 1.0.0 — Erste öffentliche Testversion
+
+- Für kontrollierte frühe Tests veröffentlicht; unerwartetes Verhalten mit dem lesbaren und dem technischen Scanbericht melden.
+- Stabile Vereinbarung für Quarantäne und Wiederherstellung.
+- Zweisprachige Oberfläche, Dokumentation und Home-Assistant-Einstellungen.
+- Nur ausdrücklich vom Nutzer ausgewähltes Entfernen von Entitäten, Geräten und Registereinträgen über offizielle APIs.
+- Sichere Migration bestehender Berichte, Pläne und Quarantänedaten.
+
+### Nach 1.0
+
+- Weitere allgemeine Cache-Profile mit nachgewiesenem Wiederherstellungsverhalten.
+- Bessere Speichertrends und geschätzte Einsparung je Integration.
+- Optionale Hinweise auf abgelaufene Quarantäne und dauerhafte Entitätsprobleme.
+- Weitere Sprachen über separate Übersetzungsdateien.
+- Das Löschen im Register bleibt eine bewusste Entscheidung; die Wiederherstellung erfordert eine Home-Assistant-Sicherung.
 
 ## Nederlands
 
@@ -59,6 +111,8 @@ Veiligheid gaat vóór extra opruimwinst. Een release gaat pas door wanneer risi
 ---
 
 ## English
+
+Current published release: **1.1.1**, including reference checks, Repairs and HACS support. This checkout prepares **1.2.0**: quarantine concurrency protection, reference diagnostics, list refresh fixes, documentation/translation corrections, a German interface and exports, and the companion's read-only “Referenzprüfung” sidebar panel. All releases remain intended for controlled early testing, not a guarantee of safety. See [the changelog](hass_cleaner/CHANGELOG.md).
 
 ### Principle
 

@@ -1,22 +1,24 @@
 # Changelog
 
-## 1.2.0 — Unreleased
+> Ältere Einträge stehen in der Sprache ihrer Veröffentlichung.
 
-- Ship the bundled companion at version 1.2.0, the same version as the app: shared constants module, diagnostics, and the read-only “Referenzprüfung” sidebar panel with its `www` asset. The panel only reads the existing WebSocket command, is limited to administrators and is removed with the config entry. The manifest declares `websocket_api`, `http`, `frontend` and `panel_custom` as dependencies, so Home Assistant prepares the frontend before the integration starts.
-- Companion translation files now match `strings.json` in every language; English, Dutch and German setup/Repairs texts are packaged with the companion ZIP.
+## 1.2.0 — Unveröffentlicht
 
-- Add German (Deutsch) as a third interface language: full interface dictionary, language selector, app option and settings validation. German exports (audit report, cleanup preparation, CSV headers and reference section) and the dynamic reference/confirmation texts rendered by the app are translated as well, with English as fallback for strings without a German text. The optional companion ships German setup and Repairs texts as well. Documentation remains English and Dutch.
+- Der gebündelte Companion erscheint in Version 1.2.0, derselben Version wie die App: gemeinsames Konstantenmodul, Diagnose und das schreibgeschützte Seitenleisten-Panel „Referenzprüfung“ samt `www`-Asset. Das Panel liest ausschließlich den vorhandenen WebSocket-Befehl, ist auf Administratoren beschränkt und wird mit dem Konfigurationseintrag entfernt. Das Manifest deklariert `websocket_api`, `http`, `frontend` und `panel_custom` als Abhängigkeiten, damit Home Assistant das Frontend vor dem Start der Integration bereitstellt.
+- Die Übersetzungsdateien des Companion entsprechen jetzt in jeder Sprache `strings.json`; englische, niederländische und deutsche Einrichtungs- und Reparaturtexte liegen dem Companion-ZIP bei.
 
-- Use atomic, same-filesystem quarantine moves in protected configuration storage instead of copy/delete; retain compatibility with existing app-storage quarantine and preserve concurrent writes for recovery.
-- Refresh the visible paginated list after a completed scan.
-- Distinguish reference-bridge timeouts, connection failures, permission refusals and missing companion commands without exposing server error text.
-- Align release documentation and complete the reviewed English entity-detail translations.
+- Deutsch als dritte Oberflächensprache: vollständiges Oberflächenwörterbuch, Sprachwahl, App-Option und Prüfung der Einstellungen. Auch die deutschen Exporte (Prüfbericht, Bereinigungsvorbereitung, CSV-Kopfzeilen und Referenzabschnitt) sowie die von der App erzeugten dynamischen Referenz- und Bestätigungstexte sind übersetzt, mit Englisch als Rückfall für Texte ohne deutsche Fassung. Der optionale Companion liefert ebenfalls deutsche Einrichtungs- und Reparaturtexte. Die Projektdokumentation liegt auf Deutsch, Englisch und Niederländisch vor.
 
-- Fetch entity results when switching from the empty attention view to temporary signals.
-- Handle non-scalar dashboard type fields and isolate unexpected source-analysis failures; failed sources remain explicitly unavailable and retain their Repairs.
-- Report companion failure stages in the app and log code locations without exception messages or configuration values.
-- Fill visible English translation gaps in group actions, bundle review and entity details.
-- Live verification is still required: the reported TypeError did not include a traceback, so the reproduced dashboard defect is not yet confirmed as the cause on the affected installation.
+- Quarantäne verschiebt Dateien nun atomar innerhalb desselben Dateisystems im geschützten Konfigurationsspeicher, statt zu kopieren und zu löschen; die Kompatibilität mit bestehender Quarantäne im App-Speicher bleibt erhalten und gleichzeitige Schreibvorgänge überstehen die Wiederherstellung.
+- Die sichtbare seitenweise Liste wird nach einem abgeschlossenen Scan aktualisiert.
+- Zeitüberschreitungen der Referenzbrücke, Verbindungsfehler, verweigerte Berechtigungen und fehlende Companion-Befehle werden unterschieden, ohne Serverfehlertexte offenzulegen.
+- Release-Dokumentation abgeglichen und die geprüften englischen Übersetzungen der Entitätsdetails vervollständigt.
+
+- Entitätsergebnisse werden geladen, wenn aus der leeren Aufmerksamkeitsansicht zu temporären Signalen gewechselt wird.
+- Nicht skalare Typfelder von Dashboards werden behandelt und unerwartete Fehler der Quellenanalyse isoliert; fehlgeschlagene Quellen bleiben ausdrücklich nicht verfügbar und behalten ihre Reparaturhinweise.
+- Fehlerphasen des Companion werden in der App gemeldet; protokolliert werden Codestellen, keine Ausnahmetexte oder Konfigurationswerte.
+- Sichtbare Lücken der englischen Übersetzungen bei Gruppenaktionen, Bündelprüfung und Entitätsdetails geschlossen.
+- Eine Prüfung im laufenden Betrieb bleibt nötig: Der gemeldete TypeError enthielt keinen Traceback, der nachgestellte Dashboard-Fehler ist als Ursache auf der betroffenen Installation also noch nicht bestätigt.
 
 ## 1.1.1
 
