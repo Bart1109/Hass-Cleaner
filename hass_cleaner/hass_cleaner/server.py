@@ -529,8 +529,10 @@ class CleanupHandler(BaseHTTPRequestHandler):
 
     def _export_language(self, query: str) -> str:
         selected = parse_qs(query).get("language", [load_effective_settings(self.state.data_root).language])[0]
-        if selected not in {"auto", "en", "nl"}:
+        if selected not in {"auto", "en", "nl", "de"}:
             raise RequestError("Unsupported export language")
+        # Exports exist in Dutch and English only; a German interface exports
+        # English text rather than falling back to Dutch.
         return "nl" if selected == "nl" else "en"
 
     def _text_download(self, name: str, value: str) -> None:

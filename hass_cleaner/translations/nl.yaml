@@ -16,4 +16,4 @@ configuration:
     description: Volledige scanrapportsets die in appdata bewaard blijven.
   language:
     name: Taal
-    description: Kies automatisch, Nederlands of Engels voor de Hass-Cleaner-interface.
+    description: Kies automatisch, Nederlands, Engels of Duits voor de Hass-Cleaner-interface.

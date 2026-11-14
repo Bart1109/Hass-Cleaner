@@ -29,4 +29,4 @@ schema:
   retention_days: int(1,10)
   advanced_mode: bool
   report_retention_count: int(1,50)
-  language: list(auto|nl|en)
+  language: list(auto|nl|en|de)

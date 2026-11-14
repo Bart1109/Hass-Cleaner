@@ -43,6 +43,13 @@ class SettingsTests(unittest.TestCase):
             self.assertEqual(9, settings.retention_days)
             self.assertFalse(hasattr(settings, "deletion_mode"))
 
+    def test_german_language_is_accepted(self) -> None:
+        self.assertEqual("de", Settings(language="de").validated().language)
+
+    def test_unknown_language_is_rejected(self) -> None:
+        with self.assertRaises(ValueError):
+            Settings(language="fr").validated()
+
     def test_new_ui_settings_do_not_persist_removed_mode(self) -> None:
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)

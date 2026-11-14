@@ -37,7 +37,9 @@ function debounce(callback, delay = 300) {
 }
 
 function englishInterface() {
-  return window.HassCleanerI18n?.locale === "en";
+  // German uses the English source for text that has no German translation
+  // (exports, dynamic phrases), so it must not fall back to Dutch.
+  return ["en", "de"].includes(window.HassCleanerI18n?.locale);
 }
 
 function referenceText(en, nl) { return englishInterface() ? en : nl; }

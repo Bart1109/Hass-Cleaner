@@ -1,0 +1,19 @@
+configuration:
+  min_temp_age_days:
+    name: Mindestalter für temporäre Dateien
+    description: Jüngere Dateien bleiben von den empfohlenen Aufräumkategorien ausgeschlossen.
+  min_log_age_days:
+    name: Mindestalter für alte Protokolle
+    description: Jüngere Protokolldateien bleiben ausgeschlossen.
+  retention_days:
+    name: Aufbewahrung in Quarantäne
+    description: Tage, in denen Dateien in der Quarantäne wiederherstellbar bleiben, bevor endgültiges Löschen möglich wird.
+  advanced_mode:
+    name: Erweiterte Inventur
+    description: Technische Details anzeigen, ohne Sicherheitsgrenzen zu umgehen.
+  report_retention_count:
+    name: Aufzubewahrende Berichte
+    description: Vollständige Scanberichtssätze, die in den App-Daten bleiben.
+  language:
+    name: Sprache
+    description: Automatisch, Niederländisch, Englisch oder Deutsch für die Oberfläche von Hass-Cleaner wählen.

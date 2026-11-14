@@ -106,7 +106,9 @@ class ServerTests(unittest.TestCase):
         from hass_cleaner.settings import Settings
         scan = scan_tree(Path(self.config_temp.name), Settings())
         write_report_files(scan, Settings(), self.server.state.report_root)
-        for language, title in [("en", "audit report"), ("nl", "Hass-Cleaner")]:
+        # German has no export texts of its own yet; it must fall back to
+        # English rather than to Dutch.
+        for language, title in [("en", "audit report"), ("nl", "Hass-Cleaner"), ("de", "audit report")]:
             with urllib.request.urlopen(f"{self.base}/api/reports/{scan.id}.md?language={language}") as response:
                 report = response.read().decode("utf-8")
                 self.assertIn(title, report)
@@ -170,12 +172,20 @@ class ServerTests(unittest.TestCase):
         })
         self.assertEqual(200, status)
         self.assertEqual("en", saved["language"])
+        status, saved_german = self.request("/api/settings", "POST", {
+            "min_temp_age_days": 30, "min_log_age_days": 14,
+            "deletion_mode": "quarantine", "retention_days": 7,
+            "advanced_mode": False, "report_retention_count": 10,
+            "language": "de",
+        })
+        self.assertEqual(200, status)
+        self.assertEqual("de", saved_german["language"])
         with self.assertRaises(urllib.error.HTTPError) as raised:
             self.request("/api/settings", "POST", {
                 "min_temp_age_days": 30, "min_log_age_days": 14,
                 "deletion_mode": "quarantine", "retention_days": 7,
                 "advanced_mode": False, "report_retention_count": 10,
-                "language": "de",
+                "language": "fr",
             })
         self.assertEqual(400, raised.exception.code)
 

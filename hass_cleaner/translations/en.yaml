@@ -16,4 +16,4 @@ configuration:
     description: Complete scan report sets kept in app data.
   language:
     name: Language
-    description: Choose automatic, Dutch or English for the Hass-Cleaner interface.
+    description: Choose automatic, Dutch, English or German for the Hass-Cleaner interface.

@@ -56,4 +56,26 @@ context.navigator.languages = ['fr-FR'];
 i18n.setPreference('auto');
 assert.equal(i18n.locale, 'en');
 assert.equal(i18n.text('sensor.my_identifier'), 'sensor.my_identifier');
+// German is a third target language: Dutch source -> German text, with English
+// as fallback for anything untranslated.
+i18n.setPreference('de');
+assert.equal(i18n.locale, 'de');
+assert.equal(i18n.text('Nieuwe scan'), 'Neuer Scan');
+assert.equal(i18n.text('Instellingen'), 'Einstellungen');
+assert.equal(i18n.text('Entiteiten'), 'Entitäten');
+assert.equal(i18n.text('2 apparaten en 4 entities. 1 registerafwijking voor eigen beoordeling.'),
+  '2 Geräte und 4 Entitäten. 1 Registerabweichung zur eigenen Bewertung.');
+assert.equal(i18n.text('Onbekende tekst zonder vertaling'), 'Onbekende tekst zonder vertaling');
+dynamic.nodeValue = 'Instellingen';
+label.setAttribute('aria-label', 'Zoek entiteiten');
+mutationCallback([{type: 'characterData', target: dynamic}, {type: 'attributes', target: label}]);
+assert.equal(dynamic.nodeValue, 'Einstellungen');
+assert.equal(label.getAttribute('aria-label'), 'Entitäten suchen');
+context.navigator.languages = ['de-DE', 'en-GB'];
+i18n.setPreference('auto');
+assert.equal(i18n.locale, 'de');
+context.navigator.languages = ['fr-FR'];
+i18n.setPreference('auto');
+assert.equal(i18n.locale, 'en');
+
 console.log('i18n regression checks passed');

@@ -27,8 +27,8 @@ class Settings:
             raise ValueError("advanced_mode moet true of false zijn")
         if not 1 <= self.report_retention_count <= 50:
             raise ValueError("report_retention_count moet tussen 1 en 50 liggen")
-        if self.language not in {"auto", "nl", "en"}:
-            raise ValueError("language moet auto, nl of en zijn")
+        if self.language not in {"auto", "nl", "en", "de"}:
+            raise ValueError("language moet auto, nl, en of de zijn")
         return self
 
     def public_dict(self) -> dict[str, object]:
