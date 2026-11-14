@@ -66,6 +66,11 @@ assert.equal(i18n.text('Entiteiten'), 'Entitäten');
 assert.equal(i18n.text('2 apparaten en 4 entities. 1 registerafwijking voor eigen beoordeling.'),
   '2 Geräte und 4 Entitäten. 1 Registerabweichung zur eigenen Bewertung.');
 assert.equal(i18n.text('Onbekende tekst zonder vertaling'), 'Onbekende tekst zonder vertaling');
+// Dynamic texts reach the translator in English (app.js passes the English
+// source when the interface is English or German); they must become German too.
+assert.match(i18n.text('Scan snapshot only. Device and area targets indicate potential indirect use. Dynamic templates, blueprints and custom cards may hide dependencies. No references found does not mean removal is safe.'), /^Nur eine Momentaufnahme des Scans\./);
+assert.equal(i18n.text('The retention period has expired. Type DELETE to remove permanently'),
+  'Die Aufbewahrungsfrist ist abgelaufen. Zum endgültigen Löschen DELETE eingeben');
 dynamic.nodeValue = 'Instellingen';
 label.setAttribute('aria-label', 'Zoek entiteiten');
 mutationCallback([{type: 'characterData', target: dynamic}, {type: 'attributes', target: label}]);

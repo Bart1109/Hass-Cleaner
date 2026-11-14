@@ -2,7 +2,7 @@
 
 ## 1.1.2 — Unreleased
 
-- Add German (Deutsch) as a third interface language: full interface dictionary, language selector, app option and settings validation. German exports (audit report, cleanup preparation, CSV headers and reference section) are translated as well, with English as fallback for strings without a German text; documentation remains English and Dutch.
+- Add German (Deutsch) as a third interface language: full interface dictionary, language selector, app option and settings validation. German exports (audit report, cleanup preparation, CSV headers and reference section) and the dynamic reference/confirmation texts rendered by the app are translated as well, with English as fallback for strings without a German text; documentation remains English and Dutch.
 
 - Use atomic, same-filesystem quarantine moves in protected configuration storage instead of copy/delete; retain compatibility with existing app-storage quarantine and preserve concurrent writes for recovery.
 - Refresh the visible paginated list after a completed scan.

@@ -691,7 +691,64 @@
     "unavailable, unknown and problem are general Home Assistant states. Hass-Cleaner provides context and guidance; you decide what to add to the cleanup and accept the execution risk.": "unavailable, unknown und problem sind allgemeine Home-Assistant-Zustände. Hass-Cleaner liefert Kontext und Empfehlungen; du entscheidest, was du zum Aufräumen hinzufügst, und trägst das Ausführungsrisiko.",
     "unchanged": "unverändert",
     "without surprises.": "ohne Überraschungen.",
-    "you decide after reviewing guidance and the backup choice": "du entscheidest nach Empfehlung und Backup-Auswahl"
+    "you decide after reviewing guidance and the backup choice": "du entscheidest nach Empfehlung und Backup-Auswahl",
+    // Dynamic reference and confirmation texts from app.js
+    "Add the companion under Devices & services first.": "Fügen Sie den Companion zuerst unter Geräte & Dienste hinzu.",
+    "Companion check failed. See Home Assistant logs.": "Companion-Prüfung fehlgeschlagen. Siehe Home-Assistant-Protokoll.",
+    "Companion command is unavailable. Install the companion and restart Core.": "Companion-Befehl nicht verfügbar. Installieren Sie den Companion und starten Sie Core neu.",
+    "Companion request timed out. Check Core logs and scan again.": "Zeitüberschreitung bei der Companion-Anfrage. Core-Protokoll prüfen und erneut scannen.",
+    "Companion setup and limitations": "Companion einrichten und Grenzen",
+    "Connection to Home Assistant failed.": "Verbindung zu Home Assistant fehlgeschlagen.",
+    "First 100 shown; all references are included in the cleanup JSON and Markdown downloads.": "Erste 100 angezeigt; alle Verweise stehen in den JSON- und Markdown-Downloads der Bereinigung.",
+    "Home Assistant authentication failed.": "Anmeldung bei Home Assistant fehlgeschlagen.",
+    "Home Assistant is starting": "Home Assistant startet",
+    "Home Assistant refused access to the companion.": "Home Assistant verweigert dem Companion den Zugriff.",
+    "Invalid companion report. Check app and companion versions.": "Ungültiger Companion-Bericht. Prüfen Sie die Versionen von App und Companion.",
+    "Live issues: Home Assistant → Settings → System → Repairs. The companion checks every five minutes; run a new app scan to update this snapshot.": "Aktuelle Hinweise: Home Assistant → Einstellungen → System → Reparaturen. Der Companion prüft alle fünf Minuten; ein neuer App-Scan aktualisiert diese Momentaufnahme.",
+    "Loading references…": "Verweise werden geladen…",
+    "Next": "Weiter",
+    "Partial coverage": "Teilweise Abdeckung",
+    "Previous": "Zurück",
+    "Reference checks": "Referenzprüfung",
+    "Reference checks unavailable — install or check Hass-Cleaner Companion, then scan again.": "Referenzprüfung nicht verfügbar – Hass-Cleaner Companion installieren oder prüfen, dann erneut scannen.",
+    "Scan snapshot only. Device and area targets indicate potential indirect use. Dynamic templates, blueprints and custom cards may hide dependencies. No references found does not mean removal is safe.": "Nur eine Momentaufnahme des Scans. Geräte- und Bereichsziele können auf indirekte Nutzung hinweisen. Dynamische Templates, Blueprints und eigene Karten können Abhängigkeiten verbergen. Keine Verweise gefunden heißt nicht, dass Entfernen sicher ist.",
+    "Show all references": "Alle Verweise anzeigen",
+    "Show missing targets": "Fehlende Ziele anzeigen",
+    "Show references and coverage": "Verweise und Abdeckung anzeigen",
+    "Source coverage": "Abdeckung der Quellen",
+    "Static check completed": "Statische Prüfung abgeschlossen",
+    "The retention period has expired. Type DELETE to remove permanently": "Die Aufbewahrungsfrist ist abgelaufen. Zum endgültigen Löschen DELETE eingeben",
+    "Type CLEAR HISTORY for a clean local start. Home Assistant itself is not changed.": "Zum sauberen lokalen Neustart CLEAR HISTORY eingeben. Home Assistant selbst wird nicht verändert.",
+    "Type CLEAR LOG. Active quarantine files and their recovery data are retained.": "CLEAR LOG eingeben. Aktive Quarantänedateien und ihre Wiederherstellungsdaten bleiben erhalten.",
+    "Type RESTORE to restore this file": "Zum Wiederherstellen RESTORE eingeben",
+    "Unexpected Home Assistant response. Check app and companion versions.": "Unerwartete Antwort von Home Assistant. Prüfen Sie die Versionen von App und Companion.",
+    "Unexpected reference connection error. Check the app logs.": "Unerwarteter Verbindungsfehler bei der Referenzprüfung. Prüfen Sie das App-Protokoll.",
+    "Unsupported companion report version.": "Nicht unterstützte Version des Companion-Berichts.",
+    "analysing references": "Verweise werden analysiert",
+    "automations": "Automatisierungen",
+    "checked": "geprüft",
+    "dashboards": "Dashboards",
+    "energy configurations": "Energiekonfigurationen",
+    "groups": "Gruppen",
+    "helpers": "Helfer",
+    "matching references": "passende Verweise",
+    "missing": "fehlend",
+    "missing targets": "fehlende Ziele",
+    "partial": "teilweise",
+    "reading registries": "Register werden gelesen",
+    "reading sources": "Quellen werden gelesen",
+    "reading statistics": "Statistiken werden gelesen",
+    "references": "Verweise",
+    "references may be affected by this selection. Review these sources before proceeding.": "Verweise können von dieser Auswahl betroffen sein. Prüfen Sie diese Quellen, bevor Sie fortfahren.",
+    "scenes": "Szenen",
+    "scripts": "Skripte",
+    "sources": "Quellen",
+    "sources with limited coverage": "Quellen mit begrenzter Abdeckung",
+    "statistics configurations": "Statistikkonfigurationen",
+    "template sources": "Template-Quellen",
+    "unavailable": "nicht verfügbar",
+    "updating Repairs": "Reparaturen werden aktualisiert",
+    "verification unavailable": "Prüfung nicht verfügbar",
   };
   const originals = new WeakMap();
   const rendered = new WeakMap();
@@ -716,7 +773,9 @@
     let result = english[trimmed];
     // The German table is keyed by the English text, so it can reuse the
     // existing Dutch-to-English mapping instead of duplicating 450 entries.
-    if (locale === "de" && result) result = german[result] || result;
+    // Callers that already pass English (dynamic texts, reference guidance)
+    // are looked up directly, otherwise they would stay English.
+    if (locale === "de") result = german[result || trimmed] || result;
     if (!result) {
       const table = locale === "de" ? germanPatterns.concat(patterns) : patterns;
       const match = table.find(([pattern]) => pattern.test(trimmed));
