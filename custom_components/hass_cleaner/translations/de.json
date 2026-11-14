@@ -1,0 +1,19 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Hass-Cleaner Companion",
+        "description": "Prüft alle fünf Minuten Automatisierungen, Skripte, Dashboards, Szenen, Gruppen, unterstützte Helfer, Templates sowie die Energie- und Statistik-Konfiguration. Fehlende statische Verweise erscheinen unter „Reparaturen“. Die Konfiguration wird nicht verändert; verwaltet werden ausschließlich die eigenen Reparaturhinweise dieser Integration."
+      }
+    },
+    "abort": {
+      "already_configured": "Hass-Cleaner Companion ist bereits eingerichtet."
+    }
+  },
+  "issues": {
+    "missing_references": {
+      "title": "Fehlende Verweise in {source}",
+      "description": "Hass-Cleaner hat {count} fehlende statische Verweise in {source} gefunden.\n\n{references}\n\nÖffne die genannte Quelle in Home Assistant oder im zugehörigen YAML-Abschnitt und prüfe diese Pfade (Listenindizes beginnen bei 0). Korrigiere das Ziel oder stelle die fehlende Entität, das Gerät, den Bereich, die Aktion oder die Statistik wieder her. Lösche keine historischen Statistiken, um diesen Hinweis zu beheben. Lade YAML-Änderungen bei Bedarf neu. Der Companion prüft innerhalb von fünf Minuten erneut.\n\nEs wurde nichts automatisch geändert. Dynamische Templates, Blueprints und benutzerdefinierte Karten können weitere Abhängigkeiten verbergen. Eine nur teilweise geprüfte Quelle behält gegebenenfalls ihren vorherigen Hinweis. Bewusste Verweise lassen sich unter „Reparaturen“ ignorieren. Bei mehr als 30 Fundstellen steht die vollständige Liste in der App und in den Exporten zur Verfügung."
+    }
+  }
+}

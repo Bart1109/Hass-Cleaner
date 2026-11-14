@@ -104,7 +104,7 @@ Local automated tests cover the analyzer, WebSocket bridge, HA adapter contracts
 On a disposable Home Assistant 2026.9 instance:
 
 1. Install/configure the companion and verify a clean startup with no repeated errors.
-2. Add a test automation, script and manual dashboard referring to a deliberately nonexistent entity. Verify exact paths, three source issues, app results and English/Dutch text.
+2. Add a test automation, script and manual dashboard referring to a deliberately nonexistent entity. Verify exact paths, three source issues, app results and English, Dutch or German text.
 3. Correct a reference and reload it. Verify its issue resolves. Ignore another issue and verify repeated checks preserve the choice.
 4. Check YAML dashboards, a disabled registered entity, a device trigger using a registry UUID, and a dynamic template. Confirm disabled entities are not missing and dynamic coverage is partial.
 5. Temporarily make a test dashboard unreadable. Confirm its prior issue remains and the app shows limited coverage.

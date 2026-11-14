@@ -34,6 +34,13 @@ def load_companion():
     return module
 
 
+def _structure(value):
+    """Return the key structure of a translation tree so texts may differ."""
+    if isinstance(value, dict):
+        return {key: _structure(child) for key, child in value.items()}
+    return None
+
+
 class CompanionTests(unittest.IsolatedAsyncioTestCase):
     def setUp(self):
         self.companion = load_companion()
@@ -151,9 +158,11 @@ class CompanionTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(__version__, manifest["version"])
         self.assertTrue(manifest["config_flow"])
         strings = json.loads((COMPANION / "strings.json").read_text())
-        for language in ("en", "nl"):
+        for language in ("en", "nl", "de"):
             value = json.loads((COMPANION / "translations" / f"{language}.json").read_text())
             issue = value["issues"]["missing_references"]
             for placeholder in ("source", "count", "references"):
                 self.assertIn("{" + placeholder + "}", issue["description"])
+            # Every language must expose exactly the keys of strings.json.
+            self.assertEqual(_structure(strings), _structure(value), language)
         self.assertEqual(strings, json.loads((COMPANION / "translations" / "en.json").read_text()))
