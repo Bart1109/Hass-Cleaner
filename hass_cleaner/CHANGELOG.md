@@ -2,7 +2,7 @@
 
 > Ältere Einträge stehen in der Sprache ihrer Veröffentlichung.
 
-## 1.2.8 — Unveröffentlicht
+## 1.2.8 — 2026-11-14
 
 - Die Companion-Integration trägt dieselbe Version; inhaltlich ändert sich an
   der App nichts. Das Seitenleisten-Panel des Companion heißt jetzt in jeder
