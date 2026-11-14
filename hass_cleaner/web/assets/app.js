@@ -51,12 +51,25 @@ function exportLanguage() {
 
 function referenceText(en, nl) { return englishInterface() ? en : nl; }
 
-// Confirmation prompts contain markup and interpolated counts, so the German
-// dictionary cannot match them; they carry their own German wording.
-function confirmationText(en, nl, de) {
+// Sentences with interpolated counts cannot be matched by the dictionary, so
+// they carry their own wording in every language.
+function localizedText(en, nl, de) {
   const locale = window.HassCleanerI18n?.locale;
   if (locale === "de") return de;
   return locale === "en" ? en : nl;
+}
+
+// Confirmation prompts contain markup and interpolated counts, so the German
+// dictionary cannot match them; they carry their own German wording.
+function confirmationText(en, nl, de) {
+  return localizedText(en, nl, de);
+}
+
+// Backend errors arrive in Dutch; run them through the dictionary before
+// showing them so German users do not get Dutch error text.
+function translatedError(error) {
+  const message = error?.message ?? "";
+  return window.HassCleanerI18n?.text ? window.HassCleanerI18n.text(message) : message;
 }
 
 // A verified backup is only a real option once Home Assistant confirmed one.
@@ -383,8 +396,14 @@ function resetScanWorkspace() {
 function showScanProgress(scan) {
   $("#scan-empty").classList.add("hidden");
   $("#scan-progress").classList.remove("hidden");
-  $("#scan-state").textContent = scan.status === "queued" ? "In wachtrij" : "Bezig";
-  $("#progress-detail").textContent = `${scan.visited_files || 0} bestanden bekeken${scan.current_path ? ` · ${scan.current_path}` : ""}`;
+  $("#scan-state").textContent = scan.status === "queued"
+    ? localizedText("Queued", "In wachtrij", "In Warteschlange")
+    : localizedText("Running", "Bezig", "Läuft");
+  $("#progress-detail").textContent = localizedText(
+    `${scan.visited_files || 0} files checked`,
+    `${scan.visited_files || 0} bestanden bekeken`,
+    `${scan.visited_files || 0} Dateien geprüft`
+  ) + (scan.current_path ? ` · ${scan.current_path}` : "");
 }
 
 function pollScan(id) {
@@ -767,7 +786,14 @@ function renderEntities() {
   $("#entity-disabled").textContent = workspace.summary?.disabled || 0;
   $("#entity-selectable").textContent = workspace.summary?.temporary_visible ?? workspace.summary?.temporary_signals ?? 0;
   const thresholds = workspace.persistence_thresholds || {};
-  $("#entity-duration-note").textContent = `De duur gebruikt Home Assistant last_changed wanneer beschikbaar; anders start Hass-Cleaner een eigen meting. Actie nodig volgt na ${thresholds.long_days || 30} dagen, of ${thresholds.repeated_observations || 3} scans verspreid over minimaal ${thresholds.repeated_days || 7} dagen.`;
+  const longDays = thresholds.long_days || 30;
+  const repeatedObservations = thresholds.repeated_observations || 3;
+  const repeatedDays = thresholds.repeated_days || 7;
+  $("#entity-duration-note").textContent = localizedText(
+    `Duration uses Home Assistant last_changed when available; otherwise Hass-Cleaner starts its own measurement. Attention is raised after ${longDays} days, or after ${repeatedObservations} scans spanning at least ${repeatedDays} days.`,
+    `De duur gebruikt Home Assistant last_changed wanneer beschikbaar; anders start Hass-Cleaner een eigen meting. Actie nodig volgt na ${longDays} dagen, of ${repeatedObservations} scans verspreid over minimaal ${repeatedDays} dagen.`,
+    `Die Dauer nutzt Home Assistant last_changed, sofern verfügbar; andernfalls startet Hass-Cleaner eine eigene Messung. Handlungsbedarf entsteht nach ${longDays} Tagen oder nach ${repeatedObservations} Scans über mindestens ${repeatedDays} Tage.`
+  );
   renderEntityChanges(workspace.changes || {});
   const items = filteredEntities();
   state.visibleEntityIds = items.filter((item) => item.selectable_for_plan).map((item) => item.entity_id);
@@ -859,7 +885,11 @@ async function openEntity(entityId) {
     const groups = Object.entries(response.related || {}).filter(([, ids]) => ids.length);
     $("#entity-related").innerHTML = `<h3>Officiële relaties</h3>${groups.length ? `<ul>${groups.map(([type, ids]) => `<li>${escapeHtml(type)}: ${escapeHtml(ids.slice(0, 12).join(", "))}${ids.length > 12 ? " …" : ""}</li>`).join("")}</ul>` : "<p>Geen relaties gevonden. Dat is nog geen verwijderbewijs.</p>"}`;
   } catch (error) {
-    $("#entity-related").innerHTML = `<h3>Officiële relaties</h3><p>Niet beschikbaar: ${escapeHtml(error.message)}</p>`;
+    $("#entity-related").innerHTML = `<h3>${localizedText("Official relationships", "Officiële relaties", "Offizielle Beziehungen")}</h3><p>${escapeHtml(localizedText(
+      `Not available: ${translatedError(error)}`,
+      `Niet beschikbaar: ${error.message}`,
+      `Nicht verfügbar: ${translatedError(error)}`
+    ))}</p>`;
   }
 }
 
@@ -968,7 +998,11 @@ async function openBundle(bundleId) {
   const anomaly = (state.registryAudit?.anomalies || []).find((item) => item.bundle_id === bundleId);
   state.activeBundle = bundle;
   $("#bundle-dialog-title").textContent = bundle.title;
-  $("#bundle-dialog-summary").textContent = `${bundleDeviceCount(bundle)} apparaten en ${bundleEntityCount(bundle)} entities. ${anomaly ? "1 registerafwijking voor eigen beoordeling." : `${bundle.review_count} waarschuwingen.`}`;
+  $("#bundle-dialog-summary").textContent = localizedText(
+    `${bundleDeviceCount(bundle)} devices and ${bundleEntityCount(bundle)} entities. ${anomaly ? "1 registry anomaly for your review." : `${bundle.review_count} warnings.`}`,
+    `${bundleDeviceCount(bundle)} apparaten en ${bundleEntityCount(bundle)} entities. ${anomaly ? "1 registerafwijking voor eigen beoordeling." : `${bundle.review_count} waarschuwingen.`}`,
+    `${bundleDeviceCount(bundle)} Geräte und ${bundleEntityCount(bundle)} Entitäten. ${anomaly ? "1 Registerabweichung zur eigenen Bewertung." : `${bundle.review_count} Warnungen.`}`
+  );
   const generalAdvice = renderAdvice(bundle.advice || {});
   $("#bundle-advice").innerHTML = anomaly
     ? `${renderAnomalyAdvice(anomaly)}<details class="general-bundle-advice"><summary>Algemene bundelanalyse tonen</summary>${generalAdvice}</details>`
@@ -988,7 +1022,11 @@ async function openBundle(bundleId) {
       : '<div class="related-loading">Geen extra relaties gevonden.</div>';
     related.innerHTML = graph + renderLocalBundleDetails(bundle);
   } catch (error) {
-    related.querySelector(".related-loading").textContent = `Relatiezoekactie niet beschikbaar: ${error.message}`;
+    related.querySelector(".related-loading").textContent = localizedText(
+      `Relationship lookup unavailable: ${translatedError(error)}`,
+      `Relatiezoekactie niet beschikbaar: ${error.message}`,
+      `Beziehungssuche nicht verfügbar: ${translatedError(error)}`
+    );
   }
 }
 
@@ -1182,7 +1220,12 @@ async function executeQuarantine() {
     }) });
     $("#quarantine-dialog").close();
     state.selected.clear();
-    showToast(`${response.operation?.files?.length || 0} bestanden veilig naar quarantaine verplaatst`);
+    const moved = response.operation?.files?.length || 0;
+    showToast(localizedText(
+      `${moved} files moved safely to quarantine`,
+      `${moved} bestanden veilig naar quarantaine verplaatst`,
+      `${moved} Dateien sicher in die Quarantäne verschoben`
+    ));
     activateTab("quarantine");
   } catch (error) {
     showToast(error.message, true);
@@ -1251,7 +1294,12 @@ async function executeRegistryCleanup() {
     }) });
     $("#registry-execution-dialog").close();
     state.selectedEntities.clear();
-    showToast(`${response.operation?.completed?.length || 0} registeracties voltooid; start een nieuwe scan`);
+    const completed = response.operation?.completed?.length || 0;
+    showToast(localizedText(
+      `${completed} registry actions completed; run a new scan`,
+      `${completed} registeracties voltooid; start een nieuwe scan`,
+      `${completed} Registeraktionen abgeschlossen; einen neuen Scan starten`
+    ));
   } catch (error) { showToast(error.message, true); }
   updateRegistryExecuteButton();
 }

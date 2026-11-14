@@ -28,7 +28,8 @@ Sicherheit geht vor zusätzlichem Aufräumgewinn. Ein Release erfolgt erst, wenn
 | 1.2.1 | Veröffentlicht | Deutsche Dokumentation, Repository- und Betreuungsverweise auf Bart1109; keine funktionale Änderung. |
 | 1.2.2 | Veröffentlicht | App-Image aus `ghcr.io/bart1109/hass-cleaner` statt aus dem Original-Namespace. |
 | 1.2.3 | Veröffentlicht | Deutsche Texte in den Bestätigungsdialogen, deutsche Berichts-Downloads aus der Oberfläche. |
-| 1.2.4 | Vorbereitet | Ausführen-Knopf bleibt bei fehlendem geprüftem Backup nicht mehr gesperrt; restliche Dialogtexte deutsch. |
+| 1.2.4 | Veröffentlicht | Ausführen-Knopf bleibt bei fehlendem geprüftem Backup nicht mehr gesperrt; restliche Dialogtexte deutsch. |
+| 1.2.5 | Vorbereitet | Vollständig deutsche Oberfläche: Backup-Dialoge, Sammelauswahl, Berichte aus dem Backend und Fehlermeldungen. |
 
 ### Praktische Prüfung für frühe Tester
 
@@ -84,7 +85,8 @@ Veiligheid gaat vóór extra opruimwinst. Een release gaat pas door wanneer risi
 | 1.2.1 | Uitgebracht | Duitse documentatie en verwijzingen naar Bart1109; geen functionele wijziging. |
 | 1.2.2 | Uitgebracht | App-image van `ghcr.io/bart1109/hass-cleaner`. |
 | 1.2.3 | Uitgebracht | Duitse teksten in bevestigingsdialogen en Duitse rapportdownloads. |
-| 1.2.4 | Voorbereid | Uitvoerknop niet meer geblokkeerd zonder geverifieerde back-up; overige dialoogteksten Duits. |
+| 1.2.4 | Uitgebracht | Uitvoerknop niet meer geblokkeerd zonder geverifieerde back-up; overige dialoogteksten Duits. |
+| 1.2.5 | Voorbereid | Volledig Duitse interface, inclusief meldingen uit de backend. |
 
 ### Praktijkcontrole voor vroege testers
 
@@ -144,7 +146,8 @@ Safety takes priority over reclaimed space. A release proceeds only when risky s
 | 1.2.1 | Released | German documentation, repository and maintainer links for Bart1109; no functional change. |
 | 1.2.2 | Released | App image from `ghcr.io/bart1109/hass-cleaner`. |
 | 1.2.3 | Released | German texts in the confirmation dialogs and German report downloads. |
-| 1.2.4 | Prepared | Execute button no longer locked without a verified backup; remaining dialog texts in German. |
+| 1.2.4 | Released | Execute button no longer locked without a verified backup; remaining dialog texts in German. |
+| 1.2.5 | Prepared | Fully German interface, including messages from the backend. |
 
 ### Practical checks for early testers
 

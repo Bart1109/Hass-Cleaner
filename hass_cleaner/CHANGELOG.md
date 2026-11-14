@@ -2,7 +2,14 @@
 
 > Ältere Einträge stehen in der Sprache ihrer Veröffentlichung.
 
-## 1.2.4 — Unveröffentlicht
+## 1.2.5 — Unveröffentlicht
+
+- Vollständig deutsche Oberfläche: Rund 190 Texte aus dem Backend (Hinweise zu Kategorien und Wirkung, Verfügbarkeits- und Registerbefunde, Quarantäne- und Recorder-Meldungen, Plan-, Server- und Supervisor-Fehler) waren bisher nur niederländisch und sind jetzt ins Deutsche und Englische übertragen.
+- Sätze mit eingesetzten Zahlen (Anzahl verschobener Dateien, geprüfter Dateien, überwachter Entitäten, Alter von Dateien) werden über Musterregeln übersetzt.
+- Fehlermeldungen aus dem Backend laufen vor der Anzeige durch das Wörterbuch; damit sind auch Fehler-Toasts und Inline-Fehler deutsch.
+- Geprüft: App lokal ohne Home Assistant gestartet, Scan, Bericht (de/en/nl), Einstellungen und Fehlerpfade über die API durchgespielt.
+
+## 1.2.4 — 2026-11-14
 
 - Der Ausführen-Knopf im Quarantäne- und im Registerdialog blieb dauerhaft gesperrt, solange kein von Hass-Cleaner geprüftes Backup vorlag: Die Option „geprüftes Backup“ war immer vorausgewählt, ließ sich ohne Nachweis aber nie erfüllen. Sie wird jetzt deaktiviert, stattdessen wird „selbst geprüftes Backup“ gewählt; nach erfolgreicher Prüfung ist sie wieder wählbar.
 - Weitere Dialogtexte auf Deutsch: Backup-Optionen, Zusammenfassung und Bestätigungsrahmen der Recorder-Bereinigung, Sammelauswahl, Toasts zum Backup-Status sowie „read-only scan“ und das Etikett „HOME ASSISTANT APP“.
