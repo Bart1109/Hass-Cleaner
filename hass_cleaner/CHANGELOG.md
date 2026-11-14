@@ -2,7 +2,13 @@
 
 > Ältere Einträge stehen in der Sprache ihrer Veröffentlichung.
 
-## 1.2.0 — Unveröffentlicht
+## 1.2.1 — Unveröffentlicht
+
+- Deutsche Dokumentation: `README.md`, `ROADMAP.md`, `CONTRIBUTING.md`, `SECURITY.md` und `docs/reference-checks.md` führen Deutsch; Englisch und Niederländisch bleiben als vollständige Abschnitte erhalten.
+- Alle Repository-, Dokumentations- und Issue-Verweise zeigen auf `https://github.com/Bart1109/Hass-Cleaner`. `codeowners` und Maintainer nennen Bart1109; das README nennt dkwolf1 als Basis der Arbeit.
+- Keine funktionale Änderung: Oberfläche, Exporte und Verhalten entsprechen 1.2.0.
+
+## 1.2.0 — 2026-11-14
 
 - Der gebündelte Companion erscheint in Version 1.2.0, derselben Version wie die App: gemeinsames Konstantenmodul, Diagnose und das schreibgeschützte Seitenleisten-Panel „Referenzprüfung“ samt `www`-Asset. Das Panel liest ausschließlich den vorhandenen WebSocket-Befehl, ist auf Administratoren beschränkt und wird mit dem Konfigurationseintrag entfernt. Das Manifest deklariert `websocket_api`, `http`, `frontend` und `panel_custom` als Abhängigkeiten, damit Home Assistant das Frontend vor dem Start der Integration bereitstellt.
 - Die Übersetzungsdateien des Companion entsprechen jetzt in jeder Sprache `strings.json`; englische, niederländische und deutsche Einrichtungs- und Reparaturtexte liegen dem Companion-ZIP bei.

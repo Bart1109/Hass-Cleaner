@@ -4,7 +4,7 @@
 
 ## Deutsch
 
-Aktuell veröffentlichte Version: **1.1.1**, einschließlich Referenzprüfung, Reparaturhinweisen und HACS-Unterstützung. Dieser Stand bereitet **1.2.0** vor: Schutz vor gleichzeitigen Quarantänevorgängen, Referenzdiagnostik, Korrekturen beim Aktualisieren von Listen, Berichtigungen an Dokumentation und Übersetzungen, eine deutsche Oberfläche samt Exporten sowie das schreibgeschützte Seitenleisten-Panel „Referenzprüfung“ des Companion. Alle Releases bleiben für kontrollierte frühe Tests gedacht, nicht als Sicherheitsgarantie. Siehe [das Changelog](hass_cleaner/CHANGELOG.md).
+Aktuell veröffentlichte Version: **1.2.0**, einschließlich Referenzprüfung, Reparaturhinweisen, HACS-Unterstützung, deutscher Oberfläche samt Exporten und dem schreibgeschützten Seitenleisten-Panel „Referenzprüfung“ des Companion. Dieser Stand bereitet **1.2.1** vor: deutsche Dokumentation, Verweise auf dieses Repository und die Betreuung durch Bart1109 — ohne funktionale Änderung. Alle Releases bleiben für kontrollierte frühe Tests gedacht, nicht als Sicherheitsgarantie. Siehe [das Changelog](hass_cleaner/CHANGELOG.md).
 
 ### Grundsatz
 
@@ -24,7 +24,8 @@ Sicherheit geht vor zusätzlichem Aufräumgewinn. Ein Release erfolgt erst, wenn
 | 1.0.2 | Veröffentlicht | Wiederherstellungs- und Registerjournale, sichere Konfigurationssynchronisierung, begrenzter Scan-Speicher, robuste Anfrageprüfung und verbesserte zweisprachige Exporte. |
 | 1.1.0 | Veröffentlicht | Companion mit Referenzprüfung und nativen Reparaturhinweisen. |
 | 1.1.1 | Veröffentlicht | HACS-Installation und Anleitungen. |
-| 1.2.0 | Vorbereitet | Atomare Quarantäne, Diagnostik, Aktualisierung der Listen, Dokumentation und Übersetzungen, deutsche Oberfläche und das Seitenleisten-Panel „Referenzprüfung“ des Companion. |
+| 1.2.0 | Veröffentlicht | Atomare Quarantäne, Diagnostik, Aktualisierung der Listen, Dokumentation und Übersetzungen, deutsche Oberfläche und das Seitenleisten-Panel „Referenzprüfung“ des Companion. |
+| 1.2.1 | Vorbereitet | Deutsche Dokumentation, Repository- und Betreuungsverweise auf Bart1109; keine funktionale Änderung. |
 
 ### Praktische Prüfung für frühe Tester
 
@@ -76,7 +77,8 @@ Veiligheid gaat vóór extra opruimwinst. Een release gaat pas door wanneer risi
 | 1.0.2 | Uitgebracht | Herstel- en registerjournals, veilige configuratiesynchronisatie, begrensd scangeheugen, robuuste verzoekvalidatie en verbeterde tweetalige exports. |
 | 1.1.0 | Uitgebracht | Companion met referentiecontrole en native Reparaties. |
 | 1.1.1 | Uitgebracht | HACS-installatie en instructies. |
-| 1.2.0 | Voorbereid | Atomaire quarantaine, diagnostiek, lijstverversing, documentatie/vertalingen, Duitse interface en het zijpaneel “Referenzprüfung” van de companion. |
+| 1.2.0 | Uitgebracht | Atomaire quarantaine, diagnostiek, lijstverversing, documentatie/vertalingen, Duitse interface en het zijpaneel “Referenzprüfung” van de companion. |
+| 1.2.1 | Voorbereid | Duitse documentatie en verwijzingen naar Bart1109; geen functionele wijziging. |
 
 ### Praktijkcontrole voor vroege testers
 
@@ -112,7 +114,7 @@ Veiligheid gaat vóór extra opruimwinst. Een release gaat pas door wanneer risi
 
 ## English
 
-Current published release: **1.1.1**, including reference checks, Repairs and HACS support. This checkout prepares **1.2.0**: quarantine concurrency protection, reference diagnostics, list refresh fixes, documentation/translation corrections, a German interface and exports, and the companion's read-only “Referenzprüfung” sidebar panel. All releases remain intended for controlled early testing, not a guarantee of safety. See [the changelog](hass_cleaner/CHANGELOG.md).
+Current published release: **1.2.0**, including reference checks, Repairs, HACS support, a German interface with German exports and the companion's read-only “Referenzprüfung” sidebar panel. This checkout prepares **1.2.1**: German documentation, repository links and maintenance by Bart1109, with no functional change. All releases remain intended for controlled early testing, not a guarantee of safety. See [the changelog](hass_cleaner/CHANGELOG.md).
 
 ### Principle
 
@@ -132,7 +134,8 @@ Safety takes priority over reclaimed space. A release proceeds only when risky s
 | 1.0.2 | Released | Recovery and registry journals, safe configuration synchronization, bounded scan memory, robust request validation and improved bilingual exports. |
 | 1.1.0 | Released | Companion reference checks and native Repairs. |
 | 1.1.1 | Released | HACS installation support and instructions. |
-| 1.2.0 | Prepared | Atomic quarantine, diagnostics, list refresh, documentation/translations, German interface and the companion's “Referenzprüfung” sidebar panel. |
+| 1.2.0 | Released | Atomic quarantine, diagnostics, list refresh, documentation/translations, German interface and the companion's “Referenzprüfung” sidebar panel. |
+| 1.2.1 | Prepared | German documentation, repository and maintainer links for Bart1109; no functional change. |
 
 ### Practical checks for early testers
 

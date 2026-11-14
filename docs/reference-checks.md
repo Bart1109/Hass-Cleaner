@@ -1,6 +1,6 @@
 # Referenzprüfung und native Reparaturhinweise
 
-Referenzprüfungen gibt es seit 1.1.0, HACS-Unterstützung seit 1.1.1. Dieser Stand bereitet die noch unveröffentlichte Version 1.2.0 vor. Lege eine vollständige Sicherung an und teste zuerst an einer unkritischen Installation. Dieses Merkmal erreicht nicht den Funktionsumfang von Spook und belegt nicht, dass irgendetwas gefahrlos gelöscht werden darf.
+Referenzprüfungen gibt es seit 1.1.0, HACS-Unterstützung seit 1.1.1. Version 1.2.0 ist veröffentlicht; dieser Stand bereitet 1.2.1 mit deutscher Dokumentation vor. Lege eine vollständige Sicherung an und teste zuerst an einer unkritischen Installation. Dieses Merkmal erreicht nicht den Funktionsumfang von Spook und belegt nicht, dass irgendetwas gefahrlos gelöscht werden darf.
 
 ## Zwei Bausteine
 
@@ -124,7 +124,7 @@ Das Panel braucht die HTTP-Schicht und das Frontend. Das Manifest deklariert daf
 
 ## English
 
-Reference checks were introduced in 1.1.0; HACS support shipped in 1.1.1. This checkout prepares the unreleased 1.2.0. Keep a complete backup and test on a non-critical installation first. This feature does not provide Spook feature parity or prove that anything is safe to delete.
+Reference checks were introduced in 1.1.0; HACS support shipped in 1.1.1. Version 1.2.0 is released; this checkout prepares 1.2.1 with German documentation. Keep a complete backup and test on a non-critical installation first. This feature does not provide Spook feature parity or prove that anything is safe to delete.
 
 ### Two components
 
@@ -252,5 +252,5 @@ De zeven categorieën uit deel 1 zijn aangesloten, inclusief scènes, groepen, o
 - De ZIP blijft een alternatief zonder HACS. Al handmatig geïnstalleerd? Maak een back-up, download via HACS en herstart Core; behoud de bestaande integratie. Werk voortaan de companion via HACS bij en de app via de App Store.
 - Start een nieuwe appscan. Onder **Entiteiten → Referentiecontrole** staan bronnen, doelen, exacte configuratiepaden en beperkte dekking.
 - Meldingen staan bij **Instellingen → Systeem → Reparaties**. Corrigeer zelf de configuratie; de companion controleert iedere vijf minuten. Er wordt niets automatisch hersteld of verwijderd.
-- App en companion zijn afzonderlijke onderdelen en moeten afzonderlijk worden bijgewerkt. 1.2.0 is voorbereid; deze checkout bevat de Duitse interface en het zijpaneel van de companion. Praktijktests blijven nodig.
+- App en companion zijn afzonderlijke onderdelen en moeten afzonderlijk worden bijgewerkt. 1.2.0 is uitgebracht; deze checkout bereidt 1.2.1 met Duitse documentatie voor. Praktijktests blijven nodig.
 - Geen verwijzingen gevonden betekent **niet** veilig verwijderen. Templates, blueprints, aangepaste kaarten en onleesbare bronnen kunnen gebruik verbergen. Maak een volledige back-up en controleer de gevolgen.
