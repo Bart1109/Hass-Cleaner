@@ -2,7 +2,12 @@
 
 > Ältere Einträge stehen in der Sprache ihrer Veröffentlichung.
 
-## 1.2.1 — Unveröffentlicht
+## 1.2.2 — Unveröffentlicht
+
+- Das App-Image kommt jetzt aus `ghcr.io/bart1109/hass-cleaner`. Bisher verwies `config.yaml` auf das Image des Original-Repositories; dort existiert kein Tag `1.2.1`, sodass die Installation über den Add-on-Store mit `404` abbrach und die Builder-Pipeline mit `permission_denied` scheiterte.
+- Keine funktionale Änderung.
+
+## 1.2.1 — 2026-11-14
 
 - Deutsche Dokumentation: `README.md`, `ROADMAP.md`, `CONTRIBUTING.md`, `SECURITY.md` und `docs/reference-checks.md` führen Deutsch; Englisch und Niederländisch bleiben als vollständige Abschnitte erhalten.
 - Alle Repository-, Dokumentations- und Issue-Verweise zeigen auf `https://github.com/Bart1109/Hass-Cleaner`. `codeowners` und Maintainer nennen Bart1109; das README nennt dkwolf1 als Basis der Arbeit.

@@ -8,7 +8,7 @@
 
 Hass-Cleaner ist eine Home-Assistant-App, die Speicher, veraltete Entitäten und Registerbeziehungen prüft, bevor irgendetwas aufgeräumt wird. Sicherheit, eine informierte Entscheidung der Nutzer und die Wiederherstellbarkeit stehen vor dem freigewordenen Speicherplatz.
 
-> **Veröffentlichungsstand:** Version 1.2.0 ist für den kontrollierten frühen Einsatz veröffentlicht, einschließlich Installation über HACS, deutscher Oberfläche und dem Seitenleisten-Panel „Referenzprüfung“. Dieser Stand bereitet **1.2.1** vor, noch nicht veröffentlicht: deutsche Dokumentation und Verweise auf dieses Repository, ohne funktionale Änderung. Hass-Cleaner liefert Fakten, Empfehlungen, Sicherungsoptionen und Hinweise zur Wiederherstellung; die endgültige Entscheidung über das Aufräumen trifft der Nutzer.
+> **Veröffentlichungsstand:** Version 1.2.0 ist für den kontrollierten frühen Einsatz veröffentlicht, einschließlich Installation über HACS, deutscher Oberfläche und dem Seitenleisten-Panel „Referenzprüfung“. Version 1.2.1 brachte die deutsche Dokumentation und die eigenen Repository-Verweise, ohne funktionale Änderung. Dieser Stand bereitet **1.2.2** vor: Das App-Image kommt jetzt aus `ghcr.io/bart1109/hass-cleaner`. Hass-Cleaner liefert Fakten, Empfehlungen, Sicherungsoptionen und Hinweise zur Wiederherstellung; die endgültige Entscheidung über das Aufräumen trifft der Nutzer.
 
 **Companion-Vorschau seit 1.1.0.** [Referenzprüfung und native Reparaturhinweise](docs/reference-checks.md) nutzen die optionale, separat installierte Integration **Hass-Cleaner Companion**. Eine Veröffentlichung ist kein Beleg für vollständige Referenzabdeckung. Ein Abnahmetest in einer echten Home-Assistant-Installation bleibt erforderlich.
 
@@ -140,7 +140,7 @@ Beiträge sind willkommen, aber Aufräumregeln müssen im Zweifel ablehnen und T
 
 Hass-Cleaner is a Home Assistant App for inspecting storage, stale entities and registry relationships before anything is cleaned up. Safety, informed user choice and recovery come before reclaimed space.
 
-> **Release status:** version 1.2.0 is published for controlled early use, including HACS installation support, the German interface and the “Referenzprüfung” sidebar panel. This checkout prepares **1.2.1**, not yet published: German documentation and repository links, with no functional change. Hass-Cleaner provides facts, advice, backup options and recovery guidance; the user makes the final cleanup decision.
+> **Release status:** version 1.2.0 is published for controlled early use, including HACS installation support, the German interface and the “Referenzprüfung” sidebar panel. Version 1.2.1 added the German documentation and the repository links, with no functional change. This checkout prepares **1.2.2**: the app image now comes from `ghcr.io/bart1109/hass-cleaner`. Hass-Cleaner provides facts, advice, backup options and recovery guidance; the user makes the final cleanup decision.
 
 **Companion preview in 1.1.0.** [Reference checks and native Repairs](docs/reference-checks.md) use an optional, separately installed **Hass-Cleaner Companion** integration. Publication is not a claim of complete reference coverage. Live Home Assistant acceptance testing is still required.
 
@@ -319,7 +319,7 @@ Versiegebonden wijzigingen staan in [CHANGELOG.md](hass_cleaner/CHANGELOG.md). G
 4. Start de App en open de webinterface.
 5. Voer eerst een scan uit en beoordeel het rapport voordat je een actie voorbereidt.
 
-GitHub Actions bouwt de versie uit `hass_cleaner/config.yaml` voor `amd64` en `aarch64`. Gepubliceerd: **1.2.0** met HACS-ondersteuning, Duitse interface en het zijpaneel “Referenzprüfung”. Deze checkout bereidt **1.2.1** voor: Duitse documentatie en verwijzingen naar deze repository, zonder functionele wijziging. Installeer de aparte [companion](docs/reference-checks.md#nederlands-kort) via HACS door deze repository toe te voegen als type **Integratie**. De ZIP blijft een alternatief; de companion zit niet in de app-container.
+GitHub Actions bouwt de versie uit `hass_cleaner/config.yaml` voor `amd64` en `aarch64`. Gepubliceerd: **1.2.0** met HACS-ondersteuning, Duitse interface en het zijpaneel “Referenzprüfung”. Versie 1.2.1 bracht de Duitse documentatie en de verwijzingen naar deze repository, zonder functionele wijziging. Deze checkout bereidt **1.2.2** voor: de app-image komt nu van `ghcr.io/bart1109/hass-cleaner`. Installeer de aparte [companion](docs/reference-checks.md#nederlands-kort) via HACS door deze repository toe te voegen als type **Integratie**. De ZIP blijft een alternatief; de companion zit niet in de app-container.
 
 Vanaf 1.2.0 worden nieuwe quarantainebestanden atomair naar `.hass-cleaner-quarantine` in de Home Assistant-configuratiemap verplaatst. Bestaande quarantaine blijft ondersteund. Bewaar zowel de configuratiemap als appdata in je back-up; verwijder de verborgen map niet handmatig. Verplaatsen maakt nog geen schijfruimte vrij. Verplaatsingen tussen bestandssystemen worden geblokkeerd. Stop actieve schrijvers vooraf; latere wijzigingen kunnen de checksum ongeldig maken en handmatig herstel vereisen.
 

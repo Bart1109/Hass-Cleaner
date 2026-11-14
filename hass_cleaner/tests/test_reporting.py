@@ -177,7 +177,7 @@ class ReportingTests(unittest.TestCase):
         app_manifest = (app_root / "config.yaml").read_text(encoding="utf-8")
 
         self.assertIn(f"ARG BUILD_FROM={expected}", dockerfile)
-        self.assertIn('image: "ghcr.io/dkwolf1/hass-cleaner"', app_manifest)
+        self.assertIn('image: "ghcr.io/bart1109/hass-cleaner"', app_manifest)
         self.assertFalse((app_root / "build.yaml").exists())
 
     def test_manifest_uses_native_container_healthcheck_and_normalized_version(self) -> None:
