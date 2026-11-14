@@ -2,7 +2,11 @@
 
 > Ältere Einträge stehen in der Sprache ihrer Veröffentlichung.
 
-## 1.2.5 — Unveröffentlicht
+## 1.2.6 — Unveröffentlicht
+
+- Meldungen der Form „Präfix: Detail" (Start/Prüfung des Backups, lokaler Status, Register-Scan, ungültige Antworten, geänderte Dateien) haben das angehängte Detail bisher unübersetzt gelassen. Die Musterregeln übersetzen jetzt auch das Detail.
+
+## 1.2.5 — 2026-11-14
 
 - Vollständig deutsche Oberfläche: Rund 190 Texte aus dem Backend (Hinweise zu Kategorien und Wirkung, Verfügbarkeits- und Registerbefunde, Quarantäne- und Recorder-Meldungen, Plan-, Server- und Supervisor-Fehler) waren bisher nur niederländisch und sind jetzt ins Deutsche und Englische übertragen.
 - Sätze mit eingesetzten Zahlen (Anzahl verschobener Dateien, geprüfter Dateien, überwachter Entitäten, Alter von Dateien) werden über Musterregeln übersetzt.
