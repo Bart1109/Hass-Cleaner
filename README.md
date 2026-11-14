@@ -68,7 +68,7 @@ For version-specific changes, see [CHANGELOG.md](hass_cleaner/CHANGELOG.md). For
 ### Languages
 
 - Project documentation and GitHub communication use English as the primary language and Dutch as the secondary language.
-- Interface and Home Assistant App settings support Automatic, English and Nederlands.
+- Interface and Home Assistant App settings support Automatic, English, Nederlands and Deutsch. German reports and CSV exports are translated as well.
 - Automatic uses the browser or Home Assistant display language and falls back to English for unsupported languages.
 - Both configuration locations work: changed App configuration fields override their saved UI values; unchanged fields retain your UI choices. Saving in Hass-Cleaner applies your new choices again. Supervisor options are not rewritten by UI saves.
 
@@ -173,7 +173,7 @@ Versiegebonden wijzigingen staan in [CHANGELOG.md](hass_cleaner/CHANGELOG.md). G
 ### Talen
 
 - Projectdocumentatie en GitHub-communicatie gebruiken Engels als primaire taal en Nederlands als tweede taal.
-- De interface en Home Assistant App-instellingen ondersteunen Automatisch, English en Nederlands.
+- De interface en Home Assistant App-instellingen ondersteunen Automatisch, English, Nederlands en Deutsch. Ook het rapport en de CSV-export zijn in het Duits beschikbaar.
 - Automatisch gebruikt de browser- of Home Assistant-weergavetaal en valt bij een niet-ondersteunde taal terug op Engels.
 - Beide configuratieplekken werken: gewijzigde App-instellingen krijgen per veld voorrang; overige UI-keuzes blijven behouden. Opnieuw opslaan binnen Hass-Cleaner past je nieuwe keuze toe.
 

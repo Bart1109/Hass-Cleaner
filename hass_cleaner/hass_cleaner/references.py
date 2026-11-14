@@ -96,21 +96,29 @@ def selection_review(audit, entity_ids=(), device_ids=()):
 
 
 def markdown_lines(report, language="en"):
-    from .export_text import table, cell
-    nl = language == "nl"
-    lines = ["", "## Referentiecontrole" if nl else "## Reference checks", "",
-             f"Status: {cell(report.get('status', 'unavailable'))}",
-             f"{'Momentopname' if nl else 'Snapshot'}: {cell(report.get('checked_at') or '—')}", "",
-             "Geen verwijzingen gevonden betekent niet dat verwijderen veilig is. Dynamische templates, blueprints, aangepaste kaarten en onleesbare bronnen beperken de dekking. Apparaat- en ruimtedoelen tonen mogelijk indirect gebruik."
-             if nl else "No references found does not mean removal is safe. Dynamic templates, blueprints, custom cards and unreadable sources limit coverage. Device and area targets indicate potential indirect use."]
-    lines += table(["Bron", "Bron-ID", "Doeltype", "Doel", "Locatie", "Ontbreekt"] if nl else
-                   ["Source", "Source ID", "Target type", "Target", "Location", "Missing"],
+    from .export_text import table, cell, t
+
+    def text(english, dutch):
+        # Dutch has its own strings; German and English share export_text.
+        return dutch if language == "nl" else t(english, language)
+
+    unknown, yes, no = text("unknown", "onbekend"), text("yes", "ja"), text("no", "nee")
+    lines = ["", text("## Reference checks", "## Referentiecontrole"), "",
+             f"{t('Status', language)}: {cell(report.get('status', 'unavailable'))}",
+             f"{text('Snapshot', 'Momentopname')}: {cell(report.get('checked_at') or '—')}", "",
+             text("No references found does not mean removal is safe. Dynamic templates, blueprints, custom cards "
+                  "and unreadable sources limit coverage. Device and area targets indicate potential indirect use.",
+                  "Geen verwijzingen gevonden betekent niet dat verwijderen veilig is. Dynamische templates, "
+                  "blueprints, aangepaste kaarten en onleesbare bronnen beperken de dekking. Apparaat- en "
+                  "ruimtedoelen tonen mogelijk indirect gebruik.")]
+    lines += table([text("Source", "Bron"), text("Source ID", "Bron-ID"), text("Target type", "Doeltype"),
+                    text("Target", "Doel"), text("Location", "Locatie"), text("Missing", "Ontbreekt")],
                    [(r["source_name"], r["source_id"], r["target_type"], r["target_id"], r["location"],
-                     ("onbekend" if nl else "unknown") if r.get("verification") == "unavailable" else
-                     ("ja" if nl else "yes") if r["missing"] else ("nee" if nl else "no")) for r in report.get("references", [])])
+                     unknown if r.get("verification") == "unavailable" else
+                     yes if r["missing"] else no) for r in report.get("references", [])], language)
     if report.get("sources"):
-        lines += table(["Bron", "Dekking"] if nl else ["Source", "Coverage"],
-                       [(s["name"], s["status"]) for s in report["sources"]])
+        lines += table([text("Source", "Bron"), text("Coverage", "Dekking")],
+                       [(s["name"], s["status"]) for s in report["sources"]], language)
     return lines
 
 

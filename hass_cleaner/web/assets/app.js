@@ -38,8 +38,15 @@ function debounce(callback, delay = 300) {
 
 function englishInterface() {
   // German uses the English source for text that has no German translation
-  // (exports, dynamic phrases), so it must not fall back to Dutch.
+  // (confirmation keywords, dynamic phrases), so it must not fall back to Dutch.
   return ["en", "de"].includes(window.HassCleanerI18n?.locale);
+}
+
+// Downloads exist in Dutch, English and German; the link must carry the
+// language the interface actually shows.
+function exportLanguage() {
+  const locale = window.HassCleanerI18n?.locale;
+  return ["nl", "de"].includes(locale) ? locale : "en";
 }
 
 function referenceText(en, nl) { return englishInterface() ? en : nl; }
@@ -154,7 +161,8 @@ window.addEventListener("hass-cleaner-language", () => {
 });
 
 function interfaceLocale() {
-  return englishInterface() ? "en-GB" : "nl-NL";
+  const locale = window.HassCleanerI18n?.locale;
+  return locale === "nl" ? "nl-NL" : locale === "de" ? "de-DE" : "en-GB";
 }
 
 function apiUrl(path) {
@@ -1274,7 +1282,7 @@ function downloadPlan(format) {
     showToast("Maak eerst een impactplan", true);
     return;
   }
-  window.location.assign(apiUrl(`${path}?language=${englishInterface() ? "en" : "nl"}`));
+  window.location.assign(apiUrl(`${path}?language=${exportLanguage()}`));
 }
 
 async function loadPurgeHistory() {

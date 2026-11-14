@@ -106,16 +106,13 @@ class ServerTests(unittest.TestCase):
         from hass_cleaner.settings import Settings
         scan = scan_tree(Path(self.config_temp.name), Settings())
         write_report_files(scan, Settings(), self.server.state.report_root)
-        # German has no export texts of its own yet; it must fall back to
-        # English rather than to Dutch.
-        for language, title in [("en", "audit report"), ("nl", "Hass-Cleaner"), ("de", "audit report")]:
+        for language, title, inventory in [("en", "audit report", "complete file inventory"),
+                                          ("nl", "Hass-Cleaner", "bestandsinventaris"),
+                                          ("de", "Prüfbericht", "vollständige Dateiinventar")]:
             with urllib.request.urlopen(f"{self.base}/api/reports/{scan.id}.md?language={language}") as response:
                 report = response.read().decode("utf-8")
                 self.assertIn(title, report)
-                if language == "nl":
-                    self.assertIn("bestandsinventaris", report)
-                else:
-                    self.assertIn("complete file inventory", report)
+                self.assertIn(inventory, report)
         with self.assertRaises(urllib.error.HTTPError) as raised:
             urllib.request.urlopen(f"{self.base}/api/reports/{scan.id}.md?language=invalid")
         self.assertEqual(400, raised.exception.code)

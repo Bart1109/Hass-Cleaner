@@ -122,6 +122,16 @@ class ReviewFixTests(unittest.TestCase):
         self.assertIn("may prevent the integration from loading", english)
         self.assertIn("cleanup preparation", plan_markdown(plan, "en"))
         self.assertIn("herstelplan", plan_markdown(plan, "nl"))
+        german_paths = write_report_files(scan, Settings(language="de"), data / "reports")
+        german = german_paths["md"].read_text(encoding="utf-8")
+        self.assertIn("Prüfbericht", german)
+        self.assertIn("ohne passende Quelldatei", german)
+        self.assertNotIn("auditrapport", german)
+        self.assertIn("Bereinigungsvorbereitung", plan_markdown(plan, "de"))
+        # CSV column keys are localised for German only; codes stay stable.
+        german_csv = german_paths["csv"].read_text(encoding="utf-8-sig")
+        self.assertIn("datensatz_typ;element_id;pfad", german_csv)
+        self.assertNotIn("record_type", german_csv)
 
     def test_invalid_bodies_do_not_mutate_settings(self):
         config, data = self.root(), self.root()

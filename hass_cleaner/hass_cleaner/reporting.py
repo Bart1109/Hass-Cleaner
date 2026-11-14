@@ -54,7 +54,7 @@ def write_report_files(scan: ScanResult, settings: Settings, output_dir: Path) -
         "md": output_dir / f"hass-cleaner-audit-{scan.id}.md",
     }
     paths["json"].write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
-    _write_csv(scan, paths["csv"])
+    _write_csv(scan, paths["csv"], settings.language)
     paths["md"].write_text(_markdown(report), encoding="utf-8")
     return paths
 
@@ -91,30 +91,68 @@ def prune_report_files(output_dir: Path, keep_scans: int) -> list[str]:
     return removed
 
 
-def _write_csv(scan: ScanResult, path: Path) -> None:
+def bundle_reason(bundle, language: str = "en") -> str:
+    """Describe a bundle in the export language instead of leaking Dutch counts."""
+    devices, entities, warnings = {
+        "nl": ("apparaten", "entities", "waarschuwingen"),
+        "de": ("Geräte", "Entitäten", "Warnungen"),
+    }.get(language, ("devices", "entities", "warnings"))
+    return f"{len(bundle.devices)} {devices}; {len(bundle.entities)} {entities}; {bundle.review_count} {warnings}"
+
+
+def _write_csv(scan: ScanResult, path: Path, language: str = "en") -> None:
+    """Write the machine-readable CSV.
+
+    Record types, categories and actions remain stable codes so existing
+    spreadsheets keep working. Column keys and yes/no labels follow the export
+    language: English and "auto" keep the stable English keys, German gets
+    translated keys for spreadsheet readers.
+    """
+    from .export_text import t as text
+    german = language == "de"
+    yes, no = ("ja", "nein") if german else ("yes", "no")
+    headers = [
+        "record_type",
+        "item_id",
+        "path",
+        "subject_type",
+        "subject_id",
+        "name",
+        "category",
+        "risk",
+        "proposed_for_cleanup",
+        "recommended_action",
+        "size_bytes",
+        "modified_at",
+        "reason",
+        "evidence_level",
+        "possible_consequences",
+        "recovery_steps",
+        "content_preview",
+    ]
+    if german:
+        headers = [
+            "datensatz_typ",
+            "element_id",
+            "pfad",
+            "zieltyp",
+            "ziel_id",
+            "name",
+            "kategorie",
+            "risiko",
+            "fuer_bereinigung_vorgeschlagen",
+            "empfohlene_aktion",
+            "groesse_bytes",
+            "geaendert_am",
+            "grund",
+            "evidenzstufe",
+            "moegliche_folgen",
+            "wiederherstellungsschritte",
+            "inhalt_vorschau",
+        ]
     with path.open("w", encoding="utf-8-sig", newline="") as stream:
         writer = csv.writer(stream, delimiter=";")
-        writer.writerow(
-            [
-                "record_type",
-                "item_id",
-                "path",
-                "subject_type",
-                "subject_id",
-                "name",
-                "category",
-                "risk",
-                "proposed_for_cleanup",
-                "recommended_action",
-                "size_bytes",
-                "modified_at",
-                "reason",
-                "evidence_level",
-                "possible_consequences",
-                "recovery_steps",
-                "content_preview",
-            ]
-        )
+        writer.writerow(headers)
         for item in scan.items:
             writer.writerow(
                 [
@@ -126,7 +164,7 @@ def _write_csv(scan: ScanResult, path: Path) -> None:
                     "",
                     item.category,
                     item.risk,
-                    "yes" if item.risk == "safe" else "no",
+                    yes if item.risk == "safe" else no,
                     item.recommended_action,
                     item.size_bytes,
                     item.modified_at,
@@ -148,7 +186,7 @@ def _write_csv(scan: ScanResult, path: Path) -> None:
                     item.name,
                     item.category,
                     item.severity,
-                    "no",
+                    no,
                     item.recommended_action,
                     0,
                     "",
@@ -170,11 +208,11 @@ def _write_csv(scan: ScanResult, path: Path) -> None:
                     bundle.title,
                     "integration_bundle",
                     "review" if bundle.review_count else "info",
-                    "no",
+                    no,
                     "manual_review",
                     0,
                     "",
-                    f"{len(bundle.devices)} apparaten; {len(bundle.entities)} entities; {bundle.review_count} waarschuwingen",
+                    bundle_reason(bundle, language),
                     bundle.advice.get("evidence_level", ""),
                     " | ".join(str(value) for value in bundle.advice.get("possible_consequences", [])),
                     " | ".join(str(value) for value in bundle.advice.get("recovery_steps", [])),
@@ -245,9 +283,11 @@ def _write_csv(scan: ScanResult, path: Path) -> None:
             unverified = ref.get("verification") == "unavailable"
             row = ["reference", ref["source_id"], ref["location"], ref["target_type"], ref["target_id"],
                    ref["source_name"], "unverified_reference" if unverified else "missing_reference" if ref["missing"] else "existing_reference",
-                   "review" if ref["missing"] or unverified else "info", "no", "review_source", 0,
-                   scan.registry_audit.references.get("checked_at", ""), "Static reference; coverage is limited",
-                   "static", "References may break after removal", "Review the source configuration", ""]
+                   "review" if ref["missing"] or unverified else "info", no, "review_source", 0,
+                   scan.registry_audit.references.get("checked_at", ""),
+                   text("Static reference; coverage is limited"),
+                   "static", text("References may break after removal"),
+                   text("Review the source configuration"), ""]
             # Names and paths are user-controlled; prevent spreadsheet formula execution.
             writer.writerow(["'" + value if isinstance(value, str) and value.startswith(("=", "+", "-", "@", "\t", "\r")) else value for value in row])
 
@@ -256,7 +296,7 @@ def _markdown(report: dict[str, object], language: str | None = None) -> str:
     language = language or report.get("settings", {}).get("language", "en")
     if language != "nl":
         from .export_text import report_markdown
-        return report_markdown(report)
+        return report_markdown(report, language)
     scan = report["scan"]
     summary = report["review_summary"]
     assert isinstance(scan, dict)

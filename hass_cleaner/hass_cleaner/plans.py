@@ -188,7 +188,7 @@ def _markdown(plan: dict[str, Any], language: str | None = None) -> str:
     language = language or plan.get("settings", {}).get("language", "en")
     if language != "nl":
         from .export_text import plan_markdown
-        return plan_markdown(plan)
+        return plan_markdown(plan, language)
     summary = plan["summary"]
     lines = [
         "# Hass-Cleaner - impact- en herstelplan",
