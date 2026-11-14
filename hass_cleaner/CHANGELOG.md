@@ -2,7 +2,12 @@
 
 > Ältere Einträge stehen in der Sprache ihrer Veröffentlichung.
 
-## 1.2.2 — Unveröffentlicht
+## 1.2.3 — Unveröffentlicht
+
+- Bestätigungsdialoge auf Deutsch: Quarantäne, Registeraufräumen, Wiederherstellen, endgültiges Löschen sowie das Leeren von Historie und Protokoll trugen im deutschen Interface englischen Text („Type QUARANTINE to confirm“), weil sie Markup und Zähler enthalten und deshalb nicht über das Wörterbuch erreichbar waren. Sie haben jetzt eigene deutsche Formulierungen; die Bestätigungswörter selbst bleiben unverändert.
+- Berichts-Download aus der Oberfläche forderte die Sprache `en` an; er nutzt jetzt die tatsächlich angezeigte Sprache, sodass deutsche Berichte direkt geladen werden.
+
+## 1.2.2 — 2026-11-14
 
 - Das App-Image kommt jetzt aus `ghcr.io/bart1109/hass-cleaner`. Bisher verwies `config.yaml` auf das Image des Original-Repositories; dort existiert kein Tag `1.2.1`, sodass die Installation über den Add-on-Store mit `404` abbrach und die Builder-Pipeline mit `permission_denied` scheiterte.
 - Keine funktionale Änderung.

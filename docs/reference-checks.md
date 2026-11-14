@@ -1,6 +1,6 @@
 # Referenzprüfung und native Reparaturhinweise
 
-Referenzprüfungen gibt es seit 1.1.0, HACS-Unterstützung seit 1.1.1. Version 1.2.1 ist veröffentlicht; dieser Stand bereitet 1.2.2 mit eigenem Container-Image vor. Lege eine vollständige Sicherung an und teste zuerst an einer unkritischen Installation. Dieses Merkmal erreicht nicht den Funktionsumfang von Spook und belegt nicht, dass irgendetwas gefahrlos gelöscht werden darf.
+Referenzprüfungen gibt es seit 1.1.0, HACS-Unterstützung seit 1.1.1. Version 1.2.2 ist veröffentlicht; dieser Stand bereitet 1.2.3 mit deutschen Bestätigungstexten vor. Lege eine vollständige Sicherung an und teste zuerst an einer unkritischen Installation. Dieses Merkmal erreicht nicht den Funktionsumfang von Spook und belegt nicht, dass irgendetwas gefahrlos gelöscht werden darf.
 
 ## Zwei Bausteine
 
@@ -124,7 +124,7 @@ Das Panel braucht die HTTP-Schicht und das Frontend. Das Manifest deklariert daf
 
 ## English
 
-Reference checks were introduced in 1.1.0; HACS support shipped in 1.1.1. Version 1.2.1 is released; this checkout prepares 1.2.2 with its own container image. Keep a complete backup and test on a non-critical installation first. This feature does not provide Spook feature parity or prove that anything is safe to delete.
+Reference checks were introduced in 1.1.0; HACS support shipped in 1.1.1. Version 1.2.2 is released; this checkout prepares 1.2.3 with German confirmation texts. Keep a complete backup and test on a non-critical installation first. This feature does not provide Spook feature parity or prove that anything is safe to delete.
 
 ### Two components
 

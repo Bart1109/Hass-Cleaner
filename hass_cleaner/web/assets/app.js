@@ -51,6 +51,14 @@ function exportLanguage() {
 
 function referenceText(en, nl) { return englishInterface() ? en : nl; }
 
+// Confirmation prompts contain markup and interpolated counts, so the German
+// dictionary cannot match them; they carry their own German wording.
+function confirmationText(en, nl, de) {
+  const locale = window.HassCleanerI18n?.locale;
+  if (locale === "de") return de;
+  return locale === "en" ? en : nl;
+}
+
 function referenceWarning() {
   return referenceText("Scan snapshot only. Device and area targets indicate potential indirect use. Dynamic templates, blueprints and custom cards may hide dependencies. No references found does not mean removal is safe.", "Alleen een scanmomentopname. Apparaat- en ruimtedoelen tonen mogelijk indirect gebruik. Dynamische templates, blueprints en aangepaste kaarten kunnen verwijzingen verbergen. Geen verwijzingen gevonden betekent niet dat verwijderen veilig is.");
 }
@@ -1056,9 +1064,11 @@ function showPlan(response) {
 
 function openQuarantineExecution() {
   $("#quarantine-confirmation").value = "";
-  $("#quarantine-confirmation").closest("label").querySelector("span").innerHTML = englishInterface()
-    ? "Type <strong>QUARANTINE</strong> to confirm"
-    : "Typ <strong>QUARANTAINE</strong> ter bevestiging";
+  $("#quarantine-confirmation").closest("label").querySelector("span").innerHTML = confirmationText(
+    "Type <strong>QUARANTINE</strong> to confirm",
+    "Typ <strong>QUARANTAINE</strong> ter bevestiging",
+    "Zur Bestätigung <strong>QUARANTINE</strong> eingeben"
+  );
   $("#quarantine-risk-ack").checked = false;
   const hasReview = (state.latestPlan?.plan?.files || []).some((item) => item.risk === "review");
   $("#quarantine-content-risk-row").classList.toggle("hidden", !hasReview);
@@ -1173,7 +1183,11 @@ function openRegistryExecution() {
   const total = Number(summary.entity_count || 0) + Number(summary.device_count || 0);
   $("#registry-execution-summary").textContent = `${summary.entity_count || 0} entiteiten en ${summary.device_count || 0} apparaten worden definitief uit hun Home Assistant-registerrelatie verwijderd.`;
   const keyword = englishInterface() ? "DELETE" : "VERWIJDER";
-  $("#registry-confirmation-label").innerHTML = englishInterface() ? `Type <strong>${keyword} ${total}</strong> to confirm` : `Typ <strong>${keyword} ${total}</strong> ter bevestiging`;
+  $("#registry-confirmation-label").innerHTML = confirmationText(
+    `Type <strong>${keyword} ${total}</strong> to confirm`,
+    `Typ <strong>${keyword} ${total}</strong> ter bevestiging`,
+    `Zur Bestätigung <strong>${keyword} ${total}</strong> eingeben`
+  );
   $("#registry-confirmation").value = "";
   $("#registry-risk-ack").checked = false;
   $('input[name="registry-backup-choice"][value="verified"]').checked = true;
@@ -1256,7 +1270,11 @@ async function testQuarantineRestore(operation, file) {
 
 async function restoreQuarantine(operation, file) {
   const confirmation = englishInterface() ? "RESTORE" : "HERSTEL";
-  const promptText = englishInterface() ? "Type RESTORE to restore this file" : "Typ HERSTEL om dit bestand terug te plaatsen";
+  const promptText = confirmationText(
+    "Type RESTORE to restore this file",
+    "Typ HERSTEL om dit bestand terug te plaatsen",
+    "Zur Wiederherstellung RESTORE eingeben"
+  );
   if (window.prompt(promptText) !== confirmation) return;
   try {
     await api(`api/quarantine/${operation}/${file}/restore`, { method: "POST", body: JSON.stringify({ confirmation }) });
@@ -1267,7 +1285,11 @@ async function restoreQuarantine(operation, file) {
 
 async function purgeQuarantine(operation, file) {
   const confirmation = englishInterface() ? "DELETE" : "VERWIJDER";
-  const promptText = englishInterface() ? "The retention period has expired. Type DELETE to remove permanently" : "De bewaartermijn is verstreken. Typ VERWIJDER voor definitieve verwijdering";
+  const promptText = confirmationText(
+    "The retention period has expired. Type DELETE to remove permanently",
+    "De bewaartermijn is verstreken. Typ VERWIJDER voor definitieve verwijdering",
+    "Die Aufbewahrungsfrist ist abgelaufen. Zur endgültigen Löschung DELETE eingeben"
+  );
   if (window.prompt(promptText) !== confirmation) return;
   try {
     await api(`api/quarantine/${operation}/${file}/purge`, { method: "POST", body: JSON.stringify({ confirmation }) });
@@ -1381,7 +1403,11 @@ async function loadScanHistory() {
 
 async function clearLocalHistory() {
   const expected = englishInterface() ? "CLEAR HISTORY" : "WIS HISTORIE";
-  const confirmation = window.prompt(englishInterface() ? "Type CLEAR HISTORY for a clean local start. Home Assistant itself is not changed." : "Typ WIS HISTORIE voor een schone lokale start. Home Assistant zelf wordt niet gewijzigd.");
+  const confirmation = window.prompt(confirmationText(
+    "Type CLEAR HISTORY for a clean local start. Home Assistant itself is not changed.",
+    "Typ WIS HISTORIE voor een schone lokale start. Home Assistant zelf wordt niet gewijzigd.",
+    "Zur Bestätigung CLEAR HISTORY eingeben. Nur die lokale Historie wird geleert; Home Assistant selbst bleibt unverändert."
+  ));
   if (confirmation !== expected) return;
   try {
     await api("api/history/clear", { method: "POST", body: JSON.stringify({ confirmation }) });
@@ -1398,7 +1424,11 @@ async function clearLocalHistory() {
 
 async function clearQuarantineHistory() {
   const expected = englishInterface() ? "CLEAR LOG" : "WIS LOGBOEK";
-  const confirmation = window.prompt(englishInterface() ? "Type CLEAR LOG. Active quarantine files and their recovery data are retained." : "Typ WIS LOGBOEK. Actieve quarantainebestanden en hun herstelgegevens blijven behouden.");
+  const confirmation = window.prompt(confirmationText(
+    "Type CLEAR LOG. Active quarantine files and their recovery data are retained.",
+    "Typ WIS LOGBOEK. Actieve quarantainebestanden en hun herstelgegevens blijven behouden.",
+    "Zur Bestätigung CLEAR LOG eingeben. Aktive Quarantänedateien und ihre Wiederherstellungsdaten bleiben erhalten."
+  ));
   if (confirmation !== expected) return;
   try {
     const response = await api("api/quarantine/history/clear", { method: "POST", body: JSON.stringify({ confirmation }) });
@@ -1412,7 +1442,7 @@ function downloadReport(extension) {
     showToast("Voer eerst een scan uit", true);
     return;
   }
-  window.location.assign(apiUrl(`api/reports/${state.scan.id}.${extension}?language=${englishInterface() ? "en" : "nl"}`));
+  window.location.assign(apiUrl(`api/reports/${state.scan.id}.${extension}?language=${exportLanguage()}`));
 }
 
 async function saveSettings() {
