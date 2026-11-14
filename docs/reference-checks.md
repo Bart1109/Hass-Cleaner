@@ -118,7 +118,7 @@ On a disposable Home Assistant 2026.9 instance:
 
 The companion adds a read-only panel named **Referenzprüfung** to the sidebar (`mdi:link-variant-off`). It shows the references of the last report — source, source ID, target type, target, path, and whether the target is missing or its verification is unavailable — with filters and a coverage list. The panel only calls the existing `hass_cleaner/references` WebSocket command; it reads nothing from disk and changes nothing.
 
-The panel needs the HTTP layer and the frontend, is limited to administrators, is registered after Home Assistant has started, and is removed when the config entry is unloaded. Its name deliberately differs from the app's own sidebar entry “Hass-Cleaner”, so both stay distinguishable.
+The panel needs the HTTP layer and the frontend. The manifest therefore declares `websocket_api`, `http`, `frontend` and `panel_custom` as dependencies, so Home Assistant sets those up before the integration starts; if the frontend only becomes ready later, registration is retried on `EVENT_HOMEASSISTANT_STARTED`. The panel is limited to administrators and is removed when the config entry is unloaded. Its name deliberately differs from the app's own sidebar entry “Hass-Cleaner”, so both stay distinguishable.
 
 ## Nederlands kort
 
