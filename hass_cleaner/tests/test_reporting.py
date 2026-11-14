@@ -154,7 +154,8 @@ class ReportingTests(unittest.TestCase):
         self.assertIn("Altijd eerst in quarantaine", html)
         self.assertIn('role="tablist"', html)
         self.assertEqual(8, html.count('role="tab"'))
-        self.assertEqual(9, html.count('aria-labelledby="'))
+        # 9 labelled regions plus the scan progress bar added for live progress.
+        self.assertEqual(10, html.count('aria-labelledby="'))
         self.assertIn("initializeTabAccessibility", javascript)
         self.assertIn('event.key === "ArrowRight"', javascript)
         from hass_cleaner import __version__

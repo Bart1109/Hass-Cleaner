@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="dark">
     <title>Hass-Cleaner</title>
-    <link rel="stylesheet" href="assets/styles.css?v=1.2.6">
+    <link rel="stylesheet" href="assets/styles.css?v=1.2.7">
   </head>
   <body>
     <div class="app-shell">
@@ -103,9 +103,19 @@
                 <p>De scan leest alleen metadata en wijzigt geen enkel bestand.</p>
               </div>
               <div class="scan-progress hidden" id="scan-progress">
-                <div class="progress-line"><span id="progress-fill"></span></div>
-                <strong id="progress-title">Bestanden inventariseren</strong>
+                <div class="progress-head">
+                  <strong id="progress-title">Bestanden inventariseren</strong>
+                  <span class="progress-percent" id="progress-percent">0%</span>
+                </div>
+                <div class="progress-line" id="progress-track" role="progressbar" aria-labelledby="progress-title" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                  <span id="progress-fill"></span>
+                </div>
                 <p id="progress-detail">Scan voorbereiden...</p>
+                <ol class="progress-steps" id="progress-steps">
+                  <li data-step="count">Bestanden tellen</li>
+                  <li data-step="scan">Bestanden controleren</li>
+                </ol>
+                <p class="progress-timing"><span id="progress-elapsed"></span><span id="progress-eta"></span></p>
               </div>
             </article>
 
@@ -457,7 +467,7 @@
     </dialog>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="assets/i18n.js?v=1.2.6"></script>
-    <script src="assets/app.js?v=1.2.6"></script>
+    <script src="assets/i18n.js?v=1.2.7"></script>
+    <script src="assets/app.js?v=1.2.7"></script>
   </body>
 </html>

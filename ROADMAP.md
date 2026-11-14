@@ -30,7 +30,8 @@ Sicherheit geht vor zusätzlichem Aufräumgewinn. Ein Release erfolgt erst, wenn
 | 1.2.3 | Veröffentlicht | Deutsche Texte in den Bestätigungsdialogen, deutsche Berichts-Downloads aus der Oberfläche. |
 | 1.2.4 | Veröffentlicht | Ausführen-Knopf bleibt bei fehlendem geprüftem Backup nicht mehr gesperrt; restliche Dialogtexte deutsch. |
 | 1.2.5 | Veröffentlicht | Vollständig deutsche Oberfläche: Backup-Dialoge, Sammelauswahl, Berichte aus dem Backend und Fehlermeldungen. |
-| 1.2.6 | Vorbereitet | Auch das Detail in Meldungen der Form „Präfix: Detail“ wird übersetzt. |
+| 1.2.6 | Veröffentlicht | Auch das Detail in Meldungen der Form „Präfix: Detail“ wird übersetzt. |
+| 1.2.7 | Vorbereitet | Echte Fortschrittsanzeige beim Scan: Prozent, Schritte, Laufzeit, Restzeit. |
 
 ### Praktische Prüfung für frühe Tester
 
@@ -88,7 +89,8 @@ Veiligheid gaat vóór extra opruimwinst. Een release gaat pas door wanneer risi
 | 1.2.3 | Uitgebracht | Duitse teksten in bevestigingsdialogen en Duitse rapportdownloads. |
 | 1.2.4 | Uitgebracht | Uitvoerknop niet meer geblokkeerd zonder geverifieerde back-up; overige dialoogteksten Duits. |
 | 1.2.5 | Uitgebracht | Volledig Duitse interface, inclusief meldingen uit de backend. |
-| 1.2.6 | Voorbereid | Ook het detail in “prefix: detail”-meldingen wordt vertaald. |
+| 1.2.6 | Uitgebracht | Ook het detail in “prefix: detail”-meldingen wordt vertaald. |
+| 1.2.7 | Voorbereid | Echte voortgangsindicator bij de scan: percentage, stappen, looptijd, resttijd. |
 
 ### Praktijkcontrole voor vroege testers
 
@@ -150,7 +152,8 @@ Safety takes priority over reclaimed space. A release proceeds only when risky s
 | 1.2.3 | Released | German texts in the confirmation dialogs and German report downloads. |
 | 1.2.4 | Released | Execute button no longer locked without a verified backup; remaining dialog texts in German. |
 | 1.2.5 | Released | Fully German interface, including messages from the backend. |
-| 1.2.6 | Prepared | The detail in “prefix: detail” messages is translated too. |
+| 1.2.6 | Released | The detail in “prefix: detail” messages is translated too. |
+| 1.2.7 | Prepared | Real scan progress: percentage, steps, elapsed and remaining time. |
 
 ### Practical checks for early testers
 

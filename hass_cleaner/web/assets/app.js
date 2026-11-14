@@ -393,17 +393,71 @@ function resetScanWorkspace() {
   updateEntityButtons();
 }
 
+function formatDuration(seconds) {
+  if (!Number.isFinite(seconds) || seconds < 0) return "";
+  const total = Math.max(0, Math.round(seconds));
+  const minutes = Math.floor(total / 60);
+  return minutes ? `${minutes} min ${total % 60} s` : `${total} s`;
+}
+
+// Percent is only returned when the backend counted the files up front; the
+// bar stays indeterminate instead of inventing a number. The scan caps at 99%
+// so a finished scan never looks stuck at 100% while the report is built.
+function progressPercent(scan) {
+  const total = Number(scan?.total_files || 0);
+  const visited = Number(scan?.visited_files || 0);
+  if (!total) return null;
+  return Math.max(0, Math.min(99, Math.round((visited / total) * 100)));
+}
+
+function renderProgressTiming() {
+  const scan = state.scan || {};
+  const started = scan.started_at ? new Date(scan.started_at).getTime() : 0;
+  const elapsed = started ? (Date.now() - started) / 1000 : null;
+  const percent = progressPercent(scan);
+  // Only estimate once a few percent are measured, otherwise the first files
+  // would produce wildly wrong rest times.
+  const remaining = percent && percent >= 5 && elapsed ? (elapsed * (100 - percent)) / percent : null;
+  $("#progress-elapsed").textContent = elapsed === null ? "" : localizedText(
+    `Elapsed ${formatDuration(elapsed)}`,
+    `Verstreken ${formatDuration(elapsed)}`,
+    `Verstrichen ${formatDuration(elapsed)}`
+  );
+  $("#progress-eta").textContent = remaining === null ? "" : localizedText(
+    `about ${formatDuration(remaining)} remaining`,
+    `nog ongeveer ${formatDuration(remaining)}`,
+    `noch etwa ${formatDuration(remaining)}`
+  );
+}
+
 function showScanProgress(scan) {
+  state.scan = scan;
   $("#scan-empty").classList.add("hidden");
   $("#scan-progress").classList.remove("hidden");
+  const total = Number(scan.total_files || 0);
+  const visited = Number(scan.visited_files || 0);
+  const percent = progressPercent(scan);
   $("#scan-state").textContent = scan.status === "queued"
     ? localizedText("Queued", "In wachtrij", "In Warteschlange")
     : localizedText("Running", "Bezig", "Läuft");
+  $("#progress-title").textContent = scan.status === "queued"
+    ? localizedText("Preparing scan", "Scan voorbereiden", "Scan wird vorbereitet")
+    : localizedText("Checking files", "Bestanden controleren", "Dateien werden geprüft");
+  $("#progress-percent").textContent = percent === null ? "…" : `${percent}%`;
+  $("#progress-track").classList.toggle("determinate", percent !== null);
+  $("#progress-track").setAttribute("aria-valuenow", String(percent ?? 0));
+  $("#progress-fill").style.width = percent === null ? "" : `${percent}%`;
   $("#progress-detail").textContent = localizedText(
-    `${scan.visited_files || 0} files checked`,
-    `${scan.visited_files || 0} bestanden bekeken`,
-    `${scan.visited_files || 0} Dateien geprüft`
+    `${visited}${total ? ` of ${total}` : ""} files checked`,
+    `${visited}${total ? ` van ${total}` : ""} bestanden bekeken`,
+    `${visited}${total ? ` von ${total}` : ""} Dateien geprüft`
   ) + (scan.current_path ? ` · ${scan.current_path}` : "");
+  const counting = $("#progress-steps").querySelector('[data-step="count"]');
+  const scanning = $("#progress-steps").querySelector('[data-step="scan"]');
+  if (counting) counting.className = "done";
+  if (scanning) scanning.className = scan.status === "queued" ? "" : "active";
+  renderProgressTiming();
+  if (!state.progressTimer) state.progressTimer = setInterval(renderProgressTiming, 1000);
 }
 
 function pollScan(id) {
@@ -425,6 +479,10 @@ function pollScan(id) {
 }
 
 function finishScanSummary(scan, showCompletionToast = false) {
+  if (state.progressTimer) {
+    window.clearInterval(state.progressTimer);
+    state.progressTimer = 0;
+  }
   state.scan = scan;
   state.registryAudit = scan.registry_audit || null;
   state.guidance = scan.cleanup_guidance || null;

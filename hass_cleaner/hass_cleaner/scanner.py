@@ -39,6 +39,7 @@ class ScanResult:
     finished_at: str | None = None
     current_path: str = ""
     visited_files: int = 0
+    total_files: int = 0
     ignored_files: int = 0
     items: list[ScanItem] = field(default_factory=list)
     registry_audit: RegistryAudit = field(default_factory=lambda: RegistryAudit(status="not_run"))
@@ -57,6 +58,7 @@ class ScanResult:
             "finished_at": self.finished_at,
             "current_path": self.current_path,
             "visited_files": self.visited_files,
+            "total_files": self.total_files,
             "ignored_files": self.ignored_files,
             "totals": totals,
             "counts": counts,
@@ -70,15 +72,30 @@ class ScanResult:
         return payload
 
 
-def scan_tree(root: Path, settings: Settings, scan_id: str | None = None) -> ScanResult:
-    result = ScanResult(id=scan_id or uuid.uuid4().hex, status="running")
-    result.started_at = datetime.now(timezone.utc).isoformat()
+def scan_tree(
+    root: Path,
+    settings: Settings,
+    scan_id: str | None = None,
+    result: ScanResult | None = None,
+) -> ScanResult:
+    """Walk the tree and fill ``result``.
+
+    The caller may pass the object it already serves to the interface; without
+    that the progress counters would be written to a second object and the
+    interface would keep showing zeros until the scan finished.
+    """
+    result = result or ScanResult(id=scan_id or uuid.uuid4().hex)
+    result.status = "running"
+    result.started_at = result.started_at or datetime.now(timezone.utc).isoformat()
     if not root.exists() or not root.is_dir():
         result.status = "failed"
         result.error = f"Scanroot bestaat niet of is geen directory: {root}"
         result.finished_at = datetime.now(timezone.utc).isoformat()
         return result
 
+    # A cheap pre-count turns the file phase into a real progress bar: it only
+    # stats entries, while the scan itself hashes every candidate.
+    result.total_files = _count_files(root)
     stack = [root]
     seen_inodes: set[tuple[int, int]] = set()
     try:
@@ -150,6 +167,32 @@ def scan_tree(root: Path, settings: Settings, scan_id: str | None = None) -> Sca
     return result
 
 
+def _count_files(root: Path) -> int:
+    """Count files with the same traversal rules the scan uses.
+
+    Returns 0 when the tree cannot be walked; the interface then shows an
+    indeterminate bar instead of an invented percentage.
+    """
+    total = 0
+    stack = [root]
+    while stack:
+        directory = stack.pop()
+        try:
+            entries = list(os.scandir(directory))
+        except (OSError, PermissionError):
+            continue
+        for entry in entries:
+            try:
+                if entry.is_dir(follow_symlinks=False):
+                    if entry.name != ".hass-cleaner-quarantine":
+                        stack.append(Path(entry.path))
+                    continue
+            except (OSError, PermissionError):
+                continue
+            total += 1
+    return total
+
+
 def _display_path(root: Path, path: Path) -> str:
     relative = path.relative_to(root)
     return "/homeassistant" if not relative.parts else "/homeassistant/" + relative.as_posix()
@@ -197,14 +240,19 @@ class ScanManager:
         completed = current
         try:
             settings = self.settings_loader()
-            completed = scan_tree(self.root, settings, scan_id)
+            completed = scan_tree(self.root, settings, scan_id, result=current)
             if completed.status == "completed":
+                # The result object is shared with the interface, so it must not
+                # look finished while the registry audit and the reports still
+                # run; another operation would act on a half-finished scan.
+                completed.status = "running"
                 completed.registry_audit = self.registry_scanner()
                 if self.report_dir is not None:
                     apply_availability_history(
                         completed.registry_audit,
                         self.report_dir.parent / "availability-history.json",
                     )
+                completed.status = "completed"
             if completed.status == "completed" and self.report_dir is not None:
                 from .reporting import prune_report_files, write_report_files
 

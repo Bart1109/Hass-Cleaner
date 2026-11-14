@@ -223,6 +223,10 @@
     "Voer eerst een scan uit.": "Run a scan first.",
     "In wachtrij": "Queued",
     "Bezig": "Running",
+    "Bestanden inventariseren": "Inventorying files",
+    "Bestanden tellen": "Counting files",
+    "Bestanden controleren": "Checking files",
+    "Scan voorbereiden...": "Preparing scan...",
     "Aan opschoning toevoegen": "Add to cleanup", "Uit opschoning verwijderen": "Remove from cleanup", "Geen opruimcategorieën gevonden. Je systeeminventaris blijft behouden.": "No cleanup categories found. Your system inventory remains protected.", "Aanbevolen": "Recommended", "Eigen beoordeling": "Your review", "VEILIG RECEPT": "RECOMMENDED CATEGORY", "EERST ONDERZOEKEN": "REVIEW FIRST", "Veiligheidscontrole": "Safety checks", "Producenten, voorbeelden en advies": "Producers, examples and guidance",
     "Opschoning voorbereid": "Cleanup prepared", "Opschoning voorbereiden...": "Preparing cleanup...", "Opschoning opslaan": "Save cleanup preparation", "Opschoning voorbereid. De gebruiker kiest na advies, back-upafweging en bevestiging welke acties worden uitgevoerd.": "Cleanup prepared. After reviewing guidance, backup options and confirmation, the user chooses which actions to execute.",
     "Geen integratiespecifieke signalen": "No integration-specific signals", "Officiële relaties": "Official relationships", "Geen relaties gevonden. Dat is nog geen verwijderbewijs.": "No relationships found. That does not prove removal is safe.", "Algemene bundelanalyse tonen": "Show general bundle analysis", "Apparaten": "Devices", "Herstel": "Recovery", "Mogelijke gevolgen": "Possible consequences", "Aanbevolen eerste stap": "Recommended first step", "Veilige inhoudspreview": "Safe content preview", "Waarden die gevoelig kunnen zijn worden niet opgenomen.": "Potentially sensitive values are not included.",
@@ -1167,6 +1171,10 @@
     "Run a scan first.": "Zuerst einen Scan ausführen.",
     "Queued": "In Warteschlange",
     "Running": "Läuft",
+    "Inventorying files": "Dateien werden erfasst",
+    "Counting files": "Dateien zählen",
+    "Checking files": "Dateien prüfen",
+    "Preparing scan...": "Scan wird vorbereitet …",
   };
   const originals = new WeakMap();
   const rendered = new WeakMap();

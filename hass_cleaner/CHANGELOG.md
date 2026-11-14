@@ -2,7 +2,13 @@
 
 > Ältere Einträge stehen in der Sprache ihrer Veröffentlichung.
 
-## 1.2.6 — Unveröffentlicht
+## 1.2.7 — Unveröffentlicht
+
+- **Echte Fortschrittsanzeige beim Scan.** Der Scanner zählt die Dateien vorab (reine Metadaten, rund 8 ms pro 8 000 Dateien) und meldet Gesamtzahl und Stand laufend. Die Oberfläche zeigt Prozentwert, Balken, „x von y Dateien geprüft“, den aktuellen Ordner, die beiden Schritte (Dateien zählen / Dateien prüfen), die verstrichene Zeit und eine geschätzte Restzeit.
+- **Behoben:** Der laufende Scan war über die API nicht beobachtbar — der Scan-Manager lieferte ein Platzhalterobjekt, während ein zweites Objekt befüllt wurde. Fortschritt blieb deshalb bis zum Ende bei null. `scan_tree` befüllt jetzt das Objekt, das der Endpunkt bereits ausliefert.
+- Ohne Gesamtzahl bleibt der Balken unbestimmt; es wird kein Prozentwert erfunden. Der laufende Wert ist auf 99 % begrenzt, damit ein fertiger Dateilauf nicht wie „hängt bei 100 %“ aussieht.
+
+## 1.2.6 — 2026-11-14
 
 - Meldungen der Form „Präfix: Detail" (Start/Prüfung des Backups, lokaler Status, Register-Scan, ungültige Antworten, geänderte Dateien) haben das angehängte Detail bisher unübersetzt gelassen. Die Musterregeln übersetzen jetzt auch das Detail.
 

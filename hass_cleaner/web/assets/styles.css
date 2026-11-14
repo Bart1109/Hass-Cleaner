@@ -373,3 +373,13 @@ dialog::backdrop { background: rgba(5,6,8,.76); backdrop-filter: blur(4px); }
   margin-block: .7rem;
 }
 #reference-checks { margin-block: 1rem; }
+
+/* Determinate scan progress: the width comes from the scan itself. */
+.progress-head { display: flex; width: min(420px, 90%); align-items: baseline; justify-content: space-between; gap: 12px; }
+.progress-head .progress-percent { font-size: 12px; font-weight: 800; color: var(--accent-2); font-variant-numeric: tabular-nums; }
+.progress-line.determinate span { width: 0; animation: none; transition: width .45s ease; }
+.progress-steps { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; list-style: none; margin: 14px 0 0; padding: 0; }
+.progress-steps li { border: 1px solid var(--line); border-radius: 999px; padding: 5px 10px; font-size: 11px; color: var(--muted); background: #17181b; }
+.progress-steps li.done { border-color: rgba(99,212,161,.35); color: var(--safe); }
+.progress-steps li.active { border-color: var(--accent); color: var(--text); background: var(--accent-soft); }
+.progress-timing { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; font-variant-numeric: tabular-nums; }
